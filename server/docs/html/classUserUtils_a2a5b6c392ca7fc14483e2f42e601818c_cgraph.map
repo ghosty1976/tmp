@@ -1,0 +1,6 @@
+<map id="UserUtils::login" name="UserUtils::login">
+<area shape="rect" id="Node000001" title="Аутентификация пользователя." alt="" coords="5,29,117,56"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="29,30,23,21,27,11,40,5,61,3,84,5,96,12,93,16,82,10,61,8,41,10,31,15,28,20,33,27"/>
+<area shape="rect" id="Node000002" href="$classUserUtils.html#aa3484f9a24739e88972a986b047af496" title="Хеширование пароля (bcrypt/scrypt)." alt="" coords="165,29,335,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,40,149,40,149,45,117,45"/>
+</map>

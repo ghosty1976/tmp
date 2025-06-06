@@ -5,6 +5,10 @@ QT += core network sql
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
+SOURCES += tinyexpr.c
+HEADERS += tinyexpr.h
+
+
 DEFINES += QT_DEPRECATED_WARNINGS
 
 QT += network

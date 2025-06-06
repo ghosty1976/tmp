@@ -1,0 +1,29 @@
+<map id="UserUtils::hashPassword" name="UserUtils::hashPassword">
+<area shape="rect" id="Node000001" title="Хеширование пароля (bcrypt/scrypt)." alt="" coords="1449,107,1620,133"/>
+<area shape="rect" id="Node000002" href="$classUserUtils.html#a1dffd82940f068de983435a7c10343d0" title="Смена пароля." alt="" coords="1217,5,1401,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1495,101,1400,53,1353,35,1355,30,1402,48,1497,96"/>
+<area shape="rect" id="Node000003" href="$classMyTcpServer.html#a1a5029d6c0bac4e718e6f159d24bf8ee" title=" " alt="" coords="524,40,713,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1433,113,1401,111,1019,85,714,69,714,63,1020,80,1402,105,1434,108"/>
+<area shape="rect" id="Node000006" href="$classUserUtils.html#a2a5b6c392ca7fc14483e2f42e601818c" title="Аутентификация пользователя." alt="" coords="1254,144,1365,171"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1436,139,1366,151,1365,145,1435,134"/>
+<area shape="rect" id="Node000010" href="$classUserUtils.html#a441622407870f87544ce258142338486" title="Регистрация нового пользователя." alt="" coords="777,224,932,251"/>
+<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="1497,143,1452,165,1402,185,1340,203,1276,217,1147,234,1029,242,933,243,933,237,1028,236,1147,229,1275,212,1339,198,1400,180,1450,160,1494,139"/>
+<area shape="rect" id="Node000004" href="$classMyTcpServer.html#ab4a64d2eab985d723090963f5c8a2882" title="Чтение данных от клиента." alt="" coords="278,136,474,163"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="544,91,416,138,414,133,542,86"/>
+<area shape="rect" id="Node000005" href="$classMyTcpServer.html#ac813395e1854be34f2177262d9a5013a" title="Обработчик новых подключений." alt="" coords="5,136,230,163"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="262,152,230,152,230,147,262,147"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="1348,131,1335,125,1309,123,1285,125,1273,129,1270,135,1276,142,1271,145,1264,135,1269,125,1284,119,1309,117,1336,120,1350,126"/>
+<area shape="rect" id="Node000007" href="$classMyTcpServer.html#aaffd90ba7decc0188acb72fe611e9de1" title=" " alt="" coords="994,107,1169,133"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1238,148,1167,137,1167,131,1239,143"/>
+<area shape="rect" id="Node000008" href="$classUserUtils.html#a8ec89e89bbe36fea1ab679737461c502" title="Проверка существования логина." alt="" coords="1007,157,1156,184"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="1238,164,1156,169,1156,164,1238,159"/>
+<area shape="poly" id="edge15_Node000006_Node000010" title=" " alt="" coords="1250,178,1170,199,1045,219,933,233,932,228,1044,214,1168,193,1248,173"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="978,127,475,148,474,143,978,122"/>
+<area shape="rect" id="Node000009" href="$classMyTcpServer.html#a84bb0fd1d46d0d4af347bcc913c7a7ce" title=" " alt="" coords="763,157,946,200"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="991,176,946,178,946,173,991,171"/>
+<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="1022,192,946,215,907,226,906,221,945,209,1021,186"/>
+<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="748,175,474,158,474,153,748,170"/>
+<area shape="rect" id="Node000011" href="$classMyTcpServer.html#ab6098e754ce2b67c8f3d03f6d6b35774" title=" " alt="" coords="522,220,715,247"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="761,238,716,238,716,232,761,233"/>
+<area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="562,217,416,166,418,161,564,212"/>
+</map>

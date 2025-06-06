@@ -1,0 +1,16 @@
+release/networkclient.o
+release/authregform.o
+release/functions_for_client.o
+release/main.o
+release/mainwindow.o
+release/managerformss.o
+release/passwordrecoveryform.o
+release/registrationform.o
+release/solution.o
+release/moc_authregform.o
+release/moc_mainwindow.o
+release/moc_managerformss.o
+release/moc_networkclient.o
+release/moc_passwordrecoveryform.o
+release/moc_registrationform.o
+release/moc_solution.o

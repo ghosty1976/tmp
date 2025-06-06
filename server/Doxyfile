@@ -1,0 +1,71 @@
+#---------------------------------------------------------------------------
+# Doxyfile 1.9.6
+#---------------------------------------------------------------------------
+
+# Проект
+PROJECT_NAME           = "Клиент-Серверное Приложение"
+PROJECT_NUMBER         = 1.0.0
+PROJECT_BRIEF          = "Документация для серверной части с TCP-обработчиком и утилитами"
+OUTPUT_DIRECTORY       = ./docs
+CREATE_SUBDIRS         = NO
+ALLOW_UNICODE_NAMES    = YES
+OUTPUT_LANGUAGE        = Russian
+
+# Исходные файлы
+INPUT                  = ./
+RECURSIVE              = YES
+EXCLUDE                = */tests/* */moc_* */qrc_* */ui_*
+EXCLUDE_PATTERNS       = */.git/* */build/*
+FILE_PATTERNS          = *.h *.cpp *.md
+
+
+# Парсинг
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_AS_DEFINED      = Q_OBJECT Q_SLOTS Q_SIGNALS
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Документирование
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+HIDE_FRIEND_COMPOUNDS  = NO
+INTERNAL_DOCS          = YES
+CASE_SENSE_NAMES       = YES
+
+# Графики
+HAVE_DOT               = YES
+DOT_NUM_THREADS       = 4
+UML_LOOK              = YES
+CALL_GRAPH            = YES
+CALLER_GRAPH          = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+DOT_IMAGE_FORMAT      = svg
+
+# HTML
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_EXTRA_STYLESHEET  = 
+HTML_EXTRA_FILES       = 
+GENERATE_HTMLHELP      = NO
+GENERATE_DOCSET        = NO
+
+# LaTeX (отключён)
+GENERATE_LATEX         = NO
+
+# Прочие настройки
+GENERATE_TREEVIEW      = YES
+FULL_PATH_NAMES        = NO
+SHOW_NAMESPACES        = YES
+SHOW_FILES             = YES
+SHOW_INCLUDE_FILES     = YES
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = YES
+ALPHABETICAL_INDEX     = YES
+
+# Qt-специфика
+QHP_NAMESPACE          = org.example.server
+QCH_FILE               = docs/server.qch

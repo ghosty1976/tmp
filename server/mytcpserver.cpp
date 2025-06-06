@@ -8,6 +8,11 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QRegularExpression>
+extern "C" {
+#include "tinyexpr.h"
+}
+#include <limits>
+#include <cmath>
 
 QString getDatabasePath() {
     QString appDir = QCoreApplication::applicationDirPath();
@@ -88,7 +93,8 @@ void MyTcpServer::slotServerRead()
         handleChangePassword(parts[1]);
     }
     else if (command == "SOLUTION" && parts.size() == 5) {
-        handleSolve(parts[1], parts[2].toDouble(), parts[3].toDouble(), parts[4].toInt());
+        handleSolve(parts[1], parts[2].toDouble(), parts[3].toDouble(), parts[4].toInt(), parts[5].toDouble(), parts[6].toInt());
+
     }
     else {
         mTcpSocket->write("ERROR Unknown command\n");
@@ -134,14 +140,13 @@ void MyTcpServer::handleCheckLogin(const QString& login) {
         mTcpSocket->write("ERROR Login does not exist\n");
 }
 
-// RECOVERY — универсальная команда
+// RECOVERY
 void MyTcpServer::handleRecovery(const QString& identifier)
 {
     QString code = QString::number(QRandomGenerator::global()->bounded(100000, 999999));
     bool isEmail = identifier.contains("@") || identifier.contains(".");
 
     if (isEmail) {
-        // Сначала ищем email в БД
         if (UserUtils::emailExists(identifier)) {
             QSqlQuery upd;
             upd.prepare("UPDATE Users SET restore_code = :code WHERE email = :email");
@@ -162,7 +167,7 @@ void MyTcpServer::handleRecovery(const QString& identifier)
                 return;
             }
         }
-        // Отправляем код на email в любом случае
+        // Отправляем код на email
         QString mailErr;
         if (EmailUtils::sendEmailSSL(identifier, "Recovery Code", "Your code: " + code, mailErr)) {
             mTcpSocket->write("OK Code Sent");
@@ -199,7 +204,7 @@ void MyTcpServer::handleRecovery(const QString& identifier)
 }
 
 
-// VERIFY_CODE — проверка кода (один аргумент)
+// VERIFY_CODE
 void MyTcpServer::handleVerifyCode(const QString& code)
 {
     QSqlQuery query;
@@ -218,7 +223,7 @@ void MyTcpServer::handleVerifyCode(const QString& code)
     }
 }
 
-// CHANGE — меняет пароль, только там где student_id == 55
+// CHANGE
 void MyTcpServer::handleChangePassword(const QString& password)
 {
     QSqlQuery query;
@@ -240,9 +245,122 @@ void MyTcpServer::handleChangePassword(const QString& password)
     }
 }
 
-// SOLUTION — стандартная обработка
-void MyTcpServer::handleSolve(const QString& functionText, double a, double b, int methodIndex)
+// SOLUTION
+void MyTcpServer::handleSolve(const QString& functionText, double a, double b, int methodIndex, double tolerance, int maxIterations)
 {
-    // Здесь будет логика решения уравнения, если нужно — реализовать как в старом коде.
-    mTcpSocket->write("OK Solution (not implemented here)\n");
+    QString methodName = (methodIndex == 0) ? "Дихотомия" : "Простая итерация";
+    QList<double> roots;
+    int iterations = 0;
+    bool success = false;
+    double root = 0;
+
+    if (methodIndex == 0) {
+        success = findRootDichotomyExpr(functionText, a, b, root, tolerance, maxIterations, iterations);
+        if (success) roots.append(root);
+    } else if (methodIndex == 1) {
+        success = findRootIterationExpr(functionText, a, b, root, tolerance, maxIterations, iterations);
+        if (success) roots.append(root);
+    } else {
+        mTcpSocket->write("ERROR Invalid method\n");
+        return;
+    }
+
+    // КРАСИВЫЙ HTML (как раньше)
+    QString html =
+        R"(
+    <div style="font-family:Segoe UI,Arial,sans-serif;max-width:460px;padding:16px 18px;background:#f8fafc;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">
+      <h2 style="margin-top:0;color:#274690;text-align:center;letter-spacing:1px;">Результат решения</h2>
+      <table style="width:100%;margin:18px 0 16px 0;font-size:16px;">
+        <tr><td style="padding:4px 0;"><b>Метод:</b></td><td style="padding:4px 0;color:#4376b1;">%1</td></tr>
+        <tr><td style="padding:4px 0;"><b>Интервал:</b></td><td style="padding:4px 0;">[%2, %3]</td></tr>
+        <tr><td style="padding:4px 0;"><b>Точность:</b></td><td style="padding:4px 0;">%4</td></tr>
+        <tr><td style="padding:4px 0;"><b>Количество итераций:</b></td><td style="padding:4px 0;">%5</td></tr>
+        <tr><td style="padding:4px 0;"><b>Ответ:</b></td>
+          <td style="padding:4px 0;color:#25653d;font-weight:bold;">%6</td>
+        </tr>
+      </table>
+    </div>
+    )";
+
+    QString answer;
+    if (success) {
+        answer = QString("x = %1").arg(root, 0, 'g', 12);
+    } else {
+        answer = "Нет корней на этом интервале";
+    }
+
+    QString htmlReady = html.arg(
+        methodName,
+        QString::number(a), QString::number(b),
+        QString::number(tolerance),
+        QString::number(iterations),
+        answer
+        );
+
+    QString response = "OK Solution\n" + htmlReady + "\n";
+    mTcpSocket->write(response.toUtf8());
 }
+
+
+double MyTcpServer::evalExpression(const QString& expr, double x)
+{
+    // tinyexpr поддерживает переменную x
+    te_variable vars[] = { {"x", &x} };
+    int err = 0;
+    te_expr *expression = te_compile(expr.toUtf8().constData(), vars, 1, &err);
+    if (!expression) {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    double result = te_eval(expression);
+    te_free(expression);
+    return result;
+}
+
+
+
+bool MyTcpServer::findRootDichotomyExpr(const QString& func, double a, double b, double& root, double tol, int maxIter, int& iters) {
+    double fa = evalExpression(func, a);
+    double fb = evalExpression(func, b);
+    if (std::isnan(fa) || std::isnan(fb) || fa * fb > 0) return false;
+    double mid = 0;
+    iters = 0;
+    for (; iters < maxIter; ++iters) {
+        mid = 0.5 * (a + b);
+        double fmid = evalExpression(func, mid);
+        if (std::isnan(fmid)) return false;
+        if (fabs(fmid) < tol || fabs(b - a) < tol)
+            break;
+        if (fa * fmid < 0) {
+            b = mid;
+            fb = fmid;
+        } else {
+            a = mid;
+            fa = fmid;
+        }
+    }
+    root = 0.5 * (a + b);
+    return true;
+}
+
+bool MyTcpServer::findRootIterationExpr(const QString& func, double a, double b, double& root, double tol, int maxIter, int& iters) {
+    double x0 = (a + b) / 2.0;
+    double x1 = x0;
+    iters = 0;
+    for (; iters < maxIter; ++iters) {
+        double fx = evalExpression(func, x0);
+        // Производная численно (центральная разность)
+        double h = 1e-6;
+        double dfx = (evalExpression(func, x0 + h) - evalExpression(func, x0 - h)) / (2 * h);
+        double M = fabs(dfx) > tol ? fabs(dfx) : 1.0;
+        x1 = x0 - fx / M;
+        if (x1 < a) x1 = a;
+        if (x1 > b) x1 = b;
+        if (fabs(x1 - x0) < tol)
+            break;
+        x0 = x1;
+    }
+    if (fabs(evalExpression(func, x1)) > tol * 10) return false;
+    root = x1;
+    return true;
+}
+

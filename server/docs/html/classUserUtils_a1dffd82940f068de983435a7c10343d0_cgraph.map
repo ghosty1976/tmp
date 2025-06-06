@@ -1,0 +1,5 @@
+<map id="UserUtils::changePassword" name="UserUtils::changePassword">
+<area shape="rect" id="Node000001" title="Смена пароля." alt="" coords="5,5,190,32"/>
+<area shape="rect" id="Node000002" href="$classUserUtils.html#aa3484f9a24739e88972a986b047af496" title="Хеширование пароля (bcrypt/scrypt)." alt="" coords="238,5,408,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,16,222,16,222,21,190,21"/>
+</map>

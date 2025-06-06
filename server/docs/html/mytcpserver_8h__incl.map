@@ -1,0 +1,9 @@
+<map id="mytcpserver.h" name="mytcpserver.h">
+<area shape="rect" id="Node000001" title="TCP&#45;сервер для обработки клиентских запросов." alt="" coords="92,5,196,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,75,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,35,72,73,69,69,124,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="99,80,189,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,33,147,64,141,64,141,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="213,80,307,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="166,30,228,69,225,74,163,35"/>
+</map>

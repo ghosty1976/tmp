@@ -1,0 +1,5 @@
+<map id="DbSingleton::instance" name="DbSingleton::instance">
+<area shape="rect" id="Node000001" title="Получение экземпляра класса." alt="" coords="5,5,155,32"/>
+<area shape="rect" id="Node000002" href="$classDbSingleton.html#a1acf18232c484ccf0a7ba6e3f1cfe8f7" title="Приватный конструктор." alt="" coords="203,5,374,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,16,187,16,187,21,155,21"/>
+</map>

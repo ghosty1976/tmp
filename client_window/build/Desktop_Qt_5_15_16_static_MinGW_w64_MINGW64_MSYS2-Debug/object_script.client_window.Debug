@@ -1,0 +1,17 @@
+debug/networkclient.o
+debug/authregform.o
+debug/functions_for_client.o
+debug/main.o
+debug/mainwindow.o
+debug/managerformss.o
+debug/passwordrecoveryform.o
+debug/registrationform.o
+debug/solution.o
+debug/client_window_plugin_import.o
+debug/moc_authregform.o
+debug/moc_mainwindow.o
+debug/moc_managerformss.o
+debug/moc_networkclient.o
+debug/moc_passwordrecoveryform.o
+debug/moc_registrationform.o
+debug/moc_solution.o
