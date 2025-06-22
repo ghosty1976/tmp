@@ -346,12 +346,6 @@ debug/moc_authregform.cpp: ../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
@@ -564,7 +558,7 @@ debug/moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
-		ui_mainwindow.h \
+		../../solution.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include C:/TMP/client_window/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -IC:/TMP/client_window -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtCharts -IC:/Qt/6.9.0/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtOpenGL -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtNetwork -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -772,12 +766,6 @@ debug/moc_managerformss.cpp: ../../managerformss.h \
 		../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
@@ -787,10 +775,12 @@ debug/moc_managerformss.cpp: ../../managerformss.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		../../mainwindow.h \
-		ui_mainwindow.h \
-		../../passwordrecoveryform.h \
 		../../solution.h \
-		ui_solution.h \
+		../../passwordrecoveryform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../registrationform.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.9.0/mingw_64/bin/moc.exe
@@ -931,6 +921,10 @@ debug/moc_networkclient.cpp: ../../networkclient.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/q23utility.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/q20utility.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include C:/TMP/client_window/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -IC:/TMP/client_window -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtCharts -IC:/Qt/6.9.0/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtOpenGL -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtNetwork -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\networkclient.h -o debug\moc_networkclient.cpp
@@ -1134,6 +1128,7 @@ debug/moc_passwordrecoveryform.cpp: ../../passwordrecoveryform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
@@ -1340,20 +1335,10 @@ debug/moc_registrationform.cpp: ../../registrationform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextcursor.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextdocument.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextformat.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include C:/TMP/client_window/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -IC:/TMP/client_window -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtCharts -IC:/Qt/6.9.0/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtOpenGL -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtNetwork -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\registrationform.h -o debug\moc_registrationform.cpp
@@ -1558,7 +1543,6 @@ debug/moc_solution.cpp: ../../solution.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
-		ui_solution.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include C:/TMP/client_window/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -IC:/TMP/client_window -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtCharts -IC:/Qt/6.9.0/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtOpenGL -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtNetwork -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\solution.h -o debug\moc_solution.cpp
@@ -1737,7 +1721,10 @@ debug/networkclient.o: ../../networkclient.cpp ../../networkclient.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/q23utility.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/q20utility.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QByteArray \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\networkclient.o ..\..\networkclient.cpp
 
@@ -1940,12 +1927,6 @@ debug/authregform.o: ../../authregform.cpp ../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
@@ -1955,7 +1936,13 @@ debug/authregform.o: ../../authregform.cpp ../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		ui_authregform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
 		../../networkclient.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/QTcpSocket \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtcpsocket.h \
@@ -1964,8 +1951,11 @@ debug/authregform.o: ../../authregform.cpp ../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qabstractsocket.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QInputDialog \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qinputdialog.h
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\authregform.o ..\..\authregform.cpp
 
 debug/functions_for_client.o: ../../functions_for_client.cpp ../../functions_for_client.h \
@@ -2105,6 +2095,10 @@ debug/functions_for_client.o: ../../functions_for_client.cpp ../../functions_for
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/q23utility.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/q20utility.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\functions_for_client.o ..\..\functions_for_client.cpp
 
@@ -2311,12 +2305,6 @@ debug/main.o: ../../main.cpp ../../managerformss.h \
 		../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
@@ -2326,21 +2314,15 @@ debug/main.o: ../../main.cpp ../../managerformss.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		../../mainwindow.h \
-		ui_mainwindow.h \
-		../../passwordrecoveryform.h \
 		../../solution.h \
-		ui_solution.h \
+		../../passwordrecoveryform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../registrationform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h \
-		../../networkclient.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/QTcpSocket \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtcpsocket.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkglobal.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetwork-config.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkexports.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qabstractsocket.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\..\main.cpp
 
 debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -2543,13 +2525,24 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../solution.h \
 		ui_mainwindow.h \
+		../../networkclient.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/QTcpSocket \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtcpsocket.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qabstractsocket.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\..\mainwindow.cpp
 
 debug/managerformss.o: ../../managerformss.cpp ../../managerformss.h \
@@ -2755,12 +2748,6 @@ debug/managerformss.o: ../../managerformss.cpp ../../managerformss.h \
 		../../authregform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
@@ -2770,10 +2757,12 @@ debug/managerformss.o: ../../managerformss.cpp ../../managerformss.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		../../mainwindow.h \
-		ui_mainwindow.h \
-		../../passwordrecoveryform.h \
 		../../solution.h \
-		ui_solution.h \
+		../../passwordrecoveryform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../registrationform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\managerformss.o ..\..\managerformss.cpp
 
@@ -2976,14 +2965,11 @@ debug/passwordrecoveryform.o: ../../passwordrecoveryform.cpp ../../passwordrecov
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		ui_passwordrecoveryform.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
 		../../networkclient.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/QTcpSocket \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtcpsocket.h \
@@ -2991,7 +2977,16 @@ debug/passwordrecoveryform.o: ../../passwordrecoveryform.cpp ../../passwordrecov
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetwork-config.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qabstractsocket.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QPalette
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\passwordrecoveryform.o ..\..\passwordrecoveryform.cpp
 
 debug/registrationform.o: ../../registrationform.cpp ../../registrationform.h \
@@ -3193,22 +3188,11 @@ debug/registrationform.o: ../../registrationform.cpp ../../registrationform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextcursor.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextdocument.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextformat.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		ui_registrationform.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
 		../../networkclient.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/QTcpSocket \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtcpsocket.h \
@@ -3216,7 +3200,16 @@ debug/registrationform.o: ../../registrationform.cpp ../../registrationform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetwork-config.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qabstractsocket.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h
+		../../../../../../Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QPointer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
+		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/QPalette
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\registrationform.o ..\..\registrationform.cpp
 
 debug/solution.o: ../../solution.cpp ../../solution.h \
@@ -3419,11 +3412,7 @@ debug/solution.o: ../../solution.cpp ../../solution.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
-		ui_solution.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		../../../../../../Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+		ui_solution.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\solution.o ..\..\solution.cpp
 
 debug/moc_authregform.o: debug/moc_authregform.cpp 

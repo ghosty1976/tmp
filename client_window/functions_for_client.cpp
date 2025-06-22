@@ -1,73 +1,99 @@
 #include "functions_for_client.h"
-#include "networkclient.h"  // Подключаем NetworkClient
+#include "networkclient.h"
 #include <QDebug>
 
-// Авторизация через сервер
-bool auth(QString login, QString password)
+bool auth(const QString& login, const QString& password)
 {
-    NetworkClient* client = NetworkClient::instance();
-    bool result = client->authenticate(login, password);  // Отправляем запрос на сервер
-    if (!result) {
-        qDebug() << "Ошибка авторизации.";
+    qDebug() << "[Logic] Авторизация пользователя" << login;
+    bool success = NetworkClient::instance()->authenticate(login, password);
+    if (success) {
+        qDebug() << "[Logic] Авторизация успешна";
+    } else {
+        qDebug() << "[Logic] Ошибка авторизации";
     }
-    return result;  // Возвращаем результат
+    return success;
 }
 
-// Регистрация через сервер
-bool reg(QString login, QString password, QString email)
+bool regUser(const QString& login, const QString& password, const QString& email)
 {
-    NetworkClient* client = NetworkClient::instance();
-    bool result = client->registerUser(login, password, email);  // Отправляем запрос на сервер
-    if (!result) {
-        qDebug() << "Ошибка регистрации.";
+    qDebug() << "[Logic] Запрос регистрации для" << login << email;
+    // Только 3 параметра
+    bool success = NetworkClient::instance()->registerUser(login, password, email);
+    if (success) {
+        qDebug() << "[Logic] Регистрация успешна";
+    } else {
+        qDebug() << "[Logic] Ошибка регистрации";
     }
-    return result;  // Возвращаем результат
+    return success;
 }
 
-// Проверка email (реализовано через сервер)
-bool email(QString email)
+QString requestRegisterCode(const QString& email)
 {
-    NetworkClient* client = NetworkClient::instance();
-    bool result = client->emailExists(email);  // Отправляем запрос на сервер для проверки email
-    if (!result) {
-        qDebug() << "Этот email уже существует.";
+    qDebug() << "[Logic] Запрос кода регистрации для" << email;
+    QString code = NetworkClient::instance()->requestRegisterCode(email);
+    if (!code.isEmpty()) {
+        qDebug() << "[Logic] Получен код регистрации:" << code;
+    } else {
+        qDebug() << "[Logic] Не удалось получить код регистрации";
     }
-    return result;  // Возвращаем результат
+    return code;
 }
 
-// Отправка кода восстановления через сервер
-bool sendRecoveryCode(QString email)
+QString requestRecoveryCode(const QString& login)
 {
-    NetworkClient* client = NetworkClient::instance();
-    bool result = client->sendRecoveryCode(email);  // Отправляем запрос на сервер
-    if (!result) {
-        qDebug() << "Ошибка отправки кода восстановления.";
+    qDebug() << "[Logic] Запрос кода восстановления для" << login;
+    QString code = NetworkClient::instance()->requestRecoveryCode(login);
+    if (!code.isEmpty()) {
+        qDebug() << "[Logic] Получен код восстановления:" << code;
+    } else {
+        qDebug() << "[Logic] Не удалось получить код восстановления";
     }
-    return result;  // Возвращаем результат
+    return code;
 }
 
-// Изменение пароля на сервере
-bool changePassword(QString newPassword)
+bool emailExists(const QString& email)
 {
-    NetworkClient* client = NetworkClient::instance();
-    bool result = client->changePassword(newPassword);  // Отправляем запрос на сервер для смены пароля
-    if (!result) {
-        qDebug() << "Ошибка смены пароля.";
-    }
-    return result;  // Возвращаем результат
+    qDebug() << "[Logic] Проверка email" << email;
+    bool exists = NetworkClient::instance()->emailExists(email);
+    qDebug() << (exists ? "[Logic] Email существует" : "[Logic] Email свободен");
+    return exists;
 }
 
-// Отправка данных для решения уравнения на сервер
-bool solveEquation(QString functionText, double a, double b, int methodIndex, double tolerance, int maxIterations)
+bool loginExists(const QString& login)
 {
-    NetworkClient* client = NetworkClient::instance();
-    // Отправляем запрос на сервер для решения уравнения с новыми параметрами
-    bool result = client->sendToServer(functionText, a, b, methodIndex, tolerance, maxIterations);
-
-    if (!result) {
-        qDebug() << "Ошибка отправки данных для решения уравнения.";
-    }
-
-    return result;  // Возвращаем результат
+    qDebug() << "[Logic] Проверка логина" << login;
+    bool exists = NetworkClient::instance()->checkLoginExists(login);
+    qDebug() << (exists ? "[Logic] Логин существует" : "[Logic] Логин свободен");
+    return exists;
 }
 
+bool changeUserPassword(const QString& login, const QString& newPassword)
+{
+    qDebug() << "[Logic] Запрос изменения пароля для" << login;
+    bool success = NetworkClient::instance()->changePassword(login, newPassword);
+    if (success) {
+        qDebug() << "[Logic] Пароль успешно изменён";
+    } else {
+        qDebug() << "[Logic] Ошибка изменения пароля";
+    }
+    return success;
+}
+
+QString solveEquation(const QString& functionText,
+                      double a,
+                      double b,
+                      int methodIndex,
+                      double tolerance,
+                      int maxIterations)
+{
+    qDebug() << "[Logic] Отправка задачи решения уравнения";
+    QString result = NetworkClient::instance()->getSolution(
+        functionText, a, b, methodIndex, tolerance, maxIterations
+        );
+    if (!result.isEmpty()) {
+        qDebug() << "[Logic] Решение получено";
+    } else {
+        qDebug() << "[Logic] Ошибка при получении решения";
+    }
+    return result;
+}

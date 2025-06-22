@@ -27,7 +27,7 @@ class Ui_passwordrecoveryform
 {
 public:
     QLabel *labelPasswordRecovery;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QFormLayout *formLayout;
     QVBoxLayout *verticalLayout_3;
     QGridLayout *gridLayout;
@@ -39,8 +39,8 @@ public:
     QLineEdit *lineEditLogin;
     QLineEdit *lineEditPassword;
     QLineEdit *lineEditPasswordCheck;
-    QPushButton *pushButtonNext;
-    QPushButton *pushButtonSave;
+    QPushButton *pushButtonConfirm;
+    QPushButton *pushButtonRecover;
     QHBoxLayout *horizontalLayout;
     QLabel *labelCode;
     QLineEdit *lineEditCode;
@@ -78,10 +78,10 @@ public:
         font.setPointSize(36);
         font.setBold(true);
         labelPasswordRecovery->setFont(font);
-        widget = new QWidget(passwordrecoveryform);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(310, 220, 531, 229));
-        formLayout = new QFormLayout(widget);
+        layoutWidget = new QWidget(passwordrecoveryform);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(310, 220, 571, 229));
+        formLayout = new QFormLayout(layoutWidget);
         formLayout->setObjectName("formLayout");
         formLayout->setContentsMargins(0, 0, 0, 0);
         verticalLayout_3 = new QVBoxLayout();
@@ -90,7 +90,7 @@ public:
         gridLayout->setObjectName("gridLayout");
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
-        labelLogin = new QLabel(widget);
+        labelLogin = new QLabel(layoutWidget);
         labelLogin->setObjectName("labelLogin");
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Gilroy")});
@@ -100,13 +100,13 @@ public:
 
         verticalLayout->addWidget(labelLogin);
 
-        labelPassword = new QLabel(widget);
+        labelPassword = new QLabel(layoutWidget);
         labelPassword->setObjectName("labelPassword");
         labelPassword->setFont(font1);
 
         verticalLayout->addWidget(labelPassword);
 
-        labelPasswordCheck = new QLabel(widget);
+        labelPasswordCheck = new QLabel(layoutWidget);
         labelPasswordCheck->setObjectName("labelPasswordCheck");
         labelPasswordCheck->setFont(font1);
 
@@ -117,7 +117,7 @@ public:
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
-        lineEditLogin = new QLineEdit(widget);
+        lineEditLogin = new QLineEdit(layoutWidget);
         lineEditLogin->setObjectName("lineEditLogin");
         QFont font2;
         font2.setFamilies({QString::fromUtf8("Gilroy")});
@@ -127,13 +127,13 @@ public:
 
         verticalLayout_2->addWidget(lineEditLogin);
 
-        lineEditPassword = new QLineEdit(widget);
+        lineEditPassword = new QLineEdit(layoutWidget);
         lineEditPassword->setObjectName("lineEditPassword");
         lineEditPassword->setFont(font2);
 
         verticalLayout_2->addWidget(lineEditPassword);
 
-        lineEditPasswordCheck = new QLineEdit(widget);
+        lineEditPasswordCheck = new QLineEdit(layoutWidget);
         lineEditPasswordCheck->setObjectName("lineEditPasswordCheck");
         lineEditPasswordCheck->setFont(font2);
 
@@ -145,34 +145,34 @@ public:
 
         verticalLayout_3->addLayout(gridLayout);
 
-        pushButtonNext = new QPushButton(widget);
-        pushButtonNext->setObjectName("pushButtonNext");
+        pushButtonConfirm = new QPushButton(layoutWidget);
+        pushButtonConfirm->setObjectName("pushButtonConfirm");
         QFont font3;
         font3.setFamilies({QString::fromUtf8("Gilroy")});
         font3.setPointSize(18);
         font3.setBold(true);
-        pushButtonNext->setFont(font3);
+        pushButtonConfirm->setFont(font3);
 
-        verticalLayout_3->addWidget(pushButtonNext);
+        verticalLayout_3->addWidget(pushButtonConfirm);
 
-        pushButtonSave = new QPushButton(widget);
-        pushButtonSave->setObjectName("pushButtonSave");
-        pushButtonSave->setFont(font3);
+        pushButtonRecover = new QPushButton(layoutWidget);
+        pushButtonRecover->setObjectName("pushButtonRecover");
+        pushButtonRecover->setFont(font3);
 
-        verticalLayout_3->addWidget(pushButtonSave);
+        verticalLayout_3->addWidget(pushButtonRecover);
 
 
         formLayout->setLayout(0, QFormLayout::ItemRole::LabelRole, verticalLayout_3);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        labelCode = new QLabel(widget);
+        labelCode = new QLabel(layoutWidget);
         labelCode->setObjectName("labelCode");
         labelCode->setFont(font1);
 
         horizontalLayout->addWidget(labelCode);
 
-        lineEditCode = new QLineEdit(widget);
+        lineEditCode = new QLineEdit(layoutWidget);
         lineEditCode->setObjectName("lineEditCode");
         lineEditCode->setFont(font2);
 
@@ -194,8 +194,8 @@ public:
         labelLogin->setText(QCoreApplication::translate("passwordrecoveryform", "\320\233\320\276\320\263\320\270\320\275", nullptr));
         labelPassword->setText(QCoreApplication::translate("passwordrecoveryform", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
         labelPasswordCheck->setText(QCoreApplication::translate("passwordrecoveryform", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
-        pushButtonNext->setText(QCoreApplication::translate("passwordrecoveryform", "\320\224\320\220\320\233\320\225\320\225", nullptr));
-        pushButtonSave->setText(QCoreApplication::translate("passwordrecoveryform", "\320\241\320\236\320\245\320\240\320\220\320\235\320\230\320\242\320\254", nullptr));
+        pushButtonConfirm->setText(QCoreApplication::translate("passwordrecoveryform", "\320\237\320\236\320\224\320\242\320\222\320\225\320\240\320\224\320\226\320\230\320\242\320\254", nullptr));
+        pushButtonRecover->setText(QCoreApplication::translate("passwordrecoveryform", "\320\222\320\236\320\241\320\241\320\242\320\220\320\235\320\236\320\222\320\230\320\242\320\254", nullptr));
         labelCode->setText(QCoreApplication::translate("passwordrecoveryform", "\320\232\320\276\320\264", nullptr));
         lineEditCode->setText(QString());
     } // retranslateUi

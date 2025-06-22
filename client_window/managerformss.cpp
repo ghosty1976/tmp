@@ -2,54 +2,75 @@
 #include "authregform.h"
 #include "mainwindow.h"
 #include "passwordrecoveryform.h"
-#include "solution.h"
-#include "registrationform.h" // Подключаем форму регистрации
+#include "registrationform.h"
 
 ManagerFormss::ManagerFormss(QWidget *parent, MainWindow *mainWindow)
-    : QMainWindow(parent), main_window(mainWindow) // Инициализация главного окна
+    : QMainWindow(parent),
+    main_window(mainWindow)
 {
-    // Инициализация форм:
-    this->curr_auth = new AuthRegForm();     // Создание формы авторизации
-    this->curr_auth->show();                 // Показ формы авторизации при старте
-    this->recovery_password = new passwordrecoveryform(); // Форма восстановления пароля
-    this->curr_solution = new Solution();    // Форма для вывода решения
-    this->registrationForm = new RegistrationForm(); // Форма для регистрации
+    // 1) Форма авторизации
+    this->curr_auth = new AuthRegForm();
+    this->curr_auth->show();
 
-    // Соединение сигналов и слотов:
-    // 1. При успешной авторизации показать главное окно
-    connect(curr_auth, &AuthRegForm::auth_ok, main_window, &MainWindow::slot_show);
+    // 2) Форма восстановления пароля
+    this->recovery_password = new passwordrecoveryform();
 
-    // 2. При запросе восстановления пароля показать соответствующую форму
-    connect(curr_auth, &AuthRegForm::recovery_ok, recovery_password, &passwordrecoveryform::slot_show);
+    // 3) Главное окно (ввод уравнения)
+    this->curr_solution = new Solution();
 
-    // 3. При завершении расчета показать окно с решением
-    connect(main_window, &MainWindow::solution_ok, curr_solution, &Solution::slot_show);
+    // 4) Форма регистрации
+    this->registrationForm = new RegistrationForm();
 
-    // 4. При переходе на форму регистрации
-    connect(curr_auth, &AuthRegForm::switchToRegistrationForm, this, &ManagerFormss::showRegistrationForm);
-    connect(registrationForm, &RegistrationForm::switchToAuthForm, this, &ManagerFormss::showAuthForm);
+    // 1.1. При успешной авторизации показываем MainWindow
+    connect(curr_auth, &AuthRegForm::auth_ok,
+            main_window, &MainWindow::slot_show);
+
+    // 2.1. При запросе «Забыли пароль?» передаем логин в форму восстановления
+    connect(curr_auth, &AuthRegForm::openRecoveryForm,
+            this, [this](const QString& login) {
+                recovery_password->setLogin(login); // Устанавливаем логин
+                recovery_password->slot_show();     // Показываем форму
+            });
+
+    // 3.1. При успешном восстановлении пароля вернёмся в AuthForm
+    connect(recovery_password, &passwordrecoveryform::switchToAuthForm,
+            this, [this]() {
+                curr_auth->show();                 // Показываем форму авторизации
+                recovery_password->hide();          // Скрываем форму восстановления
+            });
+
+    // 4.1. При переходе из AuthForm в RegistrationForm
+    connect(curr_auth, &AuthRegForm::switchToRegistrationForm,
+            this, &ManagerFormss::showRegistrationForm);
+
+    // 4.2. Когда нажали «Назад к авторизации» в RegistrationForm
+    connect(registrationForm, &RegistrationForm::switchToAuthForm,
+            this, &ManagerFormss::showAuthForm);
+
+    // 5.1. При получении решения показываем окно Solution
+    connect(main_window, &MainWindow::solution_ok,
+            curr_solution, [this](const QString &html) {
+                curr_solution->setSolution(html);
+                curr_solution->show();
+            });
 }
 
-// Деструктор (очистка ресурсов)
 ManagerFormss::~ManagerFormss()
 {
-    // Используем deleteLater, чтобы гарантировать корректное удаление объектов
-    curr_auth->deleteLater(); // Удаление формы авторизации
-    recovery_password->deleteLater(); // Удаление формы восстановления пароля
-    curr_solution->deleteLater(); // Удаление формы с решением
-    registrationForm->deleteLater(); // Удаление формы регистрации
+    curr_auth->deleteLater();
+    recovery_password->deleteLater();
+    curr_solution->deleteLater();
+    registrationForm->deleteLater();
 }
 
-void ManagerFormss::showRegistrationForm() {
-    if (registrationForm) {
-        this->registrationForm->show();   // Показываем форму регистрации
-        this->curr_auth->hide();          // Скрываем форму авторизации
-    }
+void ManagerFormss::showRegistrationForm()
+{
+    registrationForm->slot_show();
+    curr_auth->hide();
 }
 
-void ManagerFormss::showAuthForm() {
-    if (curr_auth) {
-        this->curr_auth->show();          // Показываем форму авторизации
-        this->registrationForm->hide();   // Скрываем форму регистрации
-    }
+void ManagerFormss::showAuthForm()
+{
+    curr_auth->show();
+    registrationForm->hide();
 }

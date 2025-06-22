@@ -1,162 +1,276 @@
 #include "passwordrecoveryform.h"
-#include "ui_passwordrecoveryform.h"  // Подключаем сгенерированный файл UI с маленькой буквы
-#include <QMessageBox>
+#include "ui_passwordrecoveryform.h"
+#include "networkclient.h"
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
-#include "networkclient.h"
+#include <QPalette>
+#include <QKeyEvent>
 
 passwordrecoveryform::passwordrecoveryform(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::passwordrecoveryform),  // Используем с маленькой буквы
-    isCodeValid(false)  // Инициализация переменной
+    ui(new Ui::passwordrecoveryform),
+    currentStep(StepCredentials)
 {
-    ui->setupUi(this);  // Настройка интерфейса
+    ui->setupUi(this);
     setWindowTitle("Восстановление пароля");
 
-    // Подключение слотов к кнопкам
-    connect(ui->pushButtonNext, &QPushButton::clicked, this, &passwordrecoveryform::on_pushButtonNext_clicked);
-    connect(ui->pushButtonSave, &QPushButton::clicked, this, &passwordrecoveryform::on_pushButtonSave_clicked);
+    // Валидатор для логина и пароля: только английские буквы и цифры
+    QRegularExpression regexAlnum("^[a-zA-Z0-9]+$");
+    ui->lineEditLogin->setValidator(new QRegularExpressionValidator(regexAlnum, this));
+    ui->lineEditPassword->setValidator(new QRegularExpressionValidator(regexAlnum, this));
+    ui->lineEditPasswordCheck->setValidator(new QRegularExpressionValidator(regexAlnum, this));
 
-    // Настройка проверки ввода английскими буквами и цифрами для логина и пароля
-    QRegularExpression regex("^[a-zA-Z0-9]+$");
-    QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
-    ui->lineEditLogin->setValidator(validator);
-    ui->lineEditPassword->setValidator(validator);
-    ui->lineEditPasswordCheck->setValidator(validator);
+    // Валидатор для кода: 6 цифр
+    ui->lineEditCode->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{6}$"), this));
 
-    // Настройка поля для ввода кода (только цифры)
-    QRegularExpression codeRegex("^[0-9]+$");
-    QRegularExpressionValidator *codeValidator = new QRegularExpressionValidator(codeRegex, this);
-    ui->lineEditCode->setValidator(codeValidator);
-
-    // Устанавливаем скрытие текста для полей пароля
+    // Скрытый ввод пароля (точки)
     ui->lineEditPassword->setEchoMode(QLineEdit::Password);
     ui->lineEditPasswordCheck->setEchoMode(QLineEdit::Password);
 
-    // Скрываем все поля и лейблы, кроме логина
-    ui->lineEditCode->setVisible(false);
-    ui->lineEditLogin->setVisible(true);
-    ui->lineEditPassword->setVisible(false);
-    ui->lineEditPasswordCheck->setVisible(false);
-    ui->pushButtonSave->setVisible(false);
+    // Переименовываем кнопки
+    ui->pushButtonConfirm->setText("ПОДТВЕРДИТЬ");
+    ui->pushButtonRecover->setText("ВОССТАНОВИТЬ");
 
-    ui->labelLogin->setVisible(true); // Лейбл для логина
-    ui->labelCode->setVisible(false); // Лейбл для кода
-    ui->labelPassword->setVisible(false); // Лейбл для пароля
-    ui->labelPasswordCheck->setVisible(false); // Лейбл для подтверждения пароля
+    // Начальная настройка UI
+    updateUI();
 
-    // Устанавливаем подсказки для полей ввода
-    ui->lineEditLogin->setPlaceholderText("Введите логин");    // Подсказка для логина
-    ui->lineEditCode->setPlaceholderText("Введите код"); // Подсказка для кода
-    ui->lineEditPassword->setPlaceholderText("Введите новый пароль"); // Подсказка для нового пароля
-    ui->lineEditPasswordCheck->setPlaceholderText("Подтвердите новый пароль"); // Подсказка для подтверждения пароля
+    // Placeholder'ы
+    ui->lineEditLogin->setPlaceholderText("...");
+    ui->lineEditPassword->setPlaceholderText("...");
+    ui->lineEditPasswordCheck->setPlaceholderText("...");
+    ui->lineEditCode->setPlaceholderText("...");
+
+    // Настройка навигации по Enter
+    ui->lineEditLogin->installEventFilter(this);
+    ui->lineEditPassword->installEventFilter(this);
+    ui->lineEditPasswordCheck->installEventFilter(this);
+    ui->lineEditCode->installEventFilter(this);
 }
 
-passwordrecoveryform::~passwordrecoveryform() {
+passwordrecoveryform::~passwordrecoveryform()
+{
     delete ui;
 }
 
-// Показать ошибку с названием окна
+bool passwordrecoveryform::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
+            if (obj == ui->lineEditLogin) {
+                ui->lineEditPassword->setFocus();
+                return true;
+            } else if (obj == ui->lineEditPassword) {
+                ui->lineEditPasswordCheck->setFocus();
+                return true;
+            } else if (obj == ui->lineEditPasswordCheck) {
+                if (ui->pushButtonConfirm->isVisible()) {
+                    on_pushButtonConfirm_clicked();
+                    return true;
+                }
+            } else if (obj == ui->lineEditCode) {
+                if (ui->pushButtonRecover->isVisible()) {
+                    on_pushButtonRecover_clicked();
+                    return true;
+                }
+            }
+        }
+    }
+    return QDialog::eventFilter(obj, event);
+}
+
+void passwordrecoveryform::setLogin(const QString& login) {
+    ui->lineEditLogin->setText(login);
+}
+
 void passwordrecoveryform::showError(const QString &title, const QString &message) {
     QMessageBox::warning(this, title, message);
 }
 
-// Настройка перехода между полями (Enter)
-void passwordrecoveryform::setupFieldFocus() {
-    setTabOrder(ui->lineEditLogin, ui->lineEditCode);  // Переход между полями логина и кода
-    setTabOrder(ui->lineEditCode, ui->lineEditPassword);  // Переход к новому паролю
-    setTabOrder(ui->lineEditPassword, ui->lineEditPasswordCheck);  // Переход к подтверждению пароля
-    setTabOrder(ui->lineEditPasswordCheck, ui->pushButtonNext);  // Переход к кнопке "Далее"
+void passwordrecoveryform::showInfo(const QString &title, const QString &message) {
+    QMessageBox::information(this, title, message);
 }
 
-// Проверка на английские буквы и цифры
-bool passwordrecoveryform::isEnglishInput(const QString &input) {
-    QRegularExpression regex("^[a-zA-Z0-9]+$");
-    return regex.match(input).hasMatch();  // Проверяем, что ввод состоит только из английских букв и цифр
+void passwordrecoveryform::lockFields() {
+    // Блокируем поля ввода
+    ui->lineEditLogin->setReadOnly(true);
+    ui->lineEditPassword->setReadOnly(true);
+    ui->lineEditPasswordCheck->setReadOnly(true);
+
+    // Устанавливаем белый цвет фона
+    QPalette palette;
+    palette.setColor(QPalette::Base, Qt::white);
+    ui->lineEditLogin->setPalette(palette);
+    ui->lineEditPassword->setPalette(palette);
+    ui->lineEditPasswordCheck->setPalette(palette);
 }
 
-// Проверка на корректность логина
-bool passwordrecoveryform::isValidLogin(const QString &login) {
-    return !login.isEmpty(); // Логин не должен быть пустым
+void passwordrecoveryform::updateUI() {
+    switch(currentStep) {
+    case StepCredentials:
+        // Шаг 1: Все поля видимы
+        ui->labelCode->setVisible(false);
+        ui->lineEditCode->setVisible(false);
+        ui->pushButtonRecover->setVisible(false);
+
+        ui->labelPassword->setVisible(true);
+        ui->lineEditPassword->setVisible(true);
+        ui->labelPasswordCheck->setVisible(true);
+        ui->lineEditPasswordCheck->setVisible(true);
+        ui->pushButtonConfirm->setVisible(true);
+
+        // Разблокируем все поля
+        ui->lineEditLogin->setReadOnly(false);
+        ui->lineEditPassword->setReadOnly(false);
+        ui->lineEditPasswordCheck->setReadOnly(false);
+
+        // Восстанавливаем стандартный цвет
+        ui->lineEditLogin->setPalette(QPalette());
+        ui->lineEditPassword->setPalette(QPalette());
+        ui->lineEditPasswordCheck->setPalette(QPalette());
+
+        // Скрытый ввод пароля (точки)
+        ui->lineEditPassword->setEchoMode(QLineEdit::Password);
+        ui->lineEditPasswordCheck->setEchoMode(QLineEdit::Password);
+
+        // Снимаем фокус со всех полей
+        ui->lineEditLogin->clearFocus();
+        ui->lineEditPassword->clearFocus();
+        ui->lineEditPasswordCheck->clearFocus();
+        ui->lineEditCode->clearFocus();
+
+        // Фокус только на поле логина
+        ui->lineEditLogin->setFocus();
+        break;
+
+    case StepCode:
+        // Шаг 2: Все поля остаются видимыми
+        ui->labelPassword->setVisible(true);
+        ui->lineEditPassword->setVisible(true);
+        ui->labelPasswordCheck->setVisible(true);
+        ui->lineEditPasswordCheck->setVisible(true);
+        ui->labelCode->setVisible(true);
+        ui->lineEditCode->setVisible(true);
+        ui->pushButtonConfirm->setVisible(false);
+        ui->pushButtonRecover->setVisible(true);
+
+        // Блокируем основные поля с белым фоном
+        lockFields();
+
+        // Снимаем фокус со всех полей
+        ui->lineEditLogin->clearFocus();
+        ui->lineEditPassword->clearFocus();
+        ui->lineEditPasswordCheck->clearFocus();
+        ui->lineEditCode->clearFocus();
+
+        // Фокус только на поле кода
+        ui->lineEditCode->setFocus();
+        break;
+    }
 }
 
-// Отправка кода на почту
-void passwordrecoveryform::sendCode() {
-    QString login = ui->lineEditLogin->text();
+bool passwordrecoveryform::validateCredentials() {
+    QString login = ui->lineEditLogin->text().trimmed();
+    QString password = ui->lineEditPassword->text();
+    QString passwordCheck = ui->lineEditPasswordCheck->text();
+
     if (login.isEmpty()) {
-        showError("Пустое поле для логина", "Пожалуйста, заполните поле для логина.");
-        return;
-    }
-
-    bool success = NetworkClient::instance()->sendRecoveryCode(login); // Метод отправки кода на сервер
-    if (success) {
-        QMessageBox::information(this, "Код отправлен", "Код был отправлен на вашу почту.");
-    } else {
-        showError("Ошибка при отправке кода", "Не удалось отправить код на почту.");
-    }
-}
-
-// Проверка паролей на совпадение
-bool passwordrecoveryform::checkPasswordMatch() {
-    if (ui->lineEditPassword->text() != ui->lineEditPasswordCheck->text()) {
-        showError("Пароли не совпадают", "Пожалуйста, введите одинаковые пароли.");
+        showError("Ошибка ввода", "Пожалуйста, введите ваш логин");
+        ui->lineEditLogin->setFocus();
         return false;
     }
+
+    // Проверка длины логина (3-20 символов)
+    if (login.length() < 3 || login.length() > 20) {
+        showError("Ошибка ввода", "Логин должен быть от 3 до 20 символов");
+        ui->lineEditLogin->setFocus();
+        return false;
+    }
+
+    // Проверка длины пароля (5-15 символов)
+    if (password.length() < 5 || password.length() > 15) {
+        showError("Ошибка ввода", "Пароль должен быть от 5 до 15 символов");
+        ui->lineEditPassword->setFocus();
+        return false;
+    }
+
+    if (password != passwordCheck) {
+        showError("Ошибка ввода", "Пароли не совпадают. Пожалуйста, убедитесь, что введенные пароли идентичны");
+        ui->lineEditPasswordCheck->setFocus();
+        return false;
+    }
+
     return true;
 }
 
-// Завершение восстановления пароля
-void passwordrecoveryform::recoverPassword() {
-    // Логика восстановления пароля (например, отправка нового пароля на сервер)
-    QMessageBox::information(this, "Восстановление пароля", "Пароль успешно восстановлен!");
-    this->close();  // Закрываем форму после восстановления пароля
+void passwordrecoveryform::on_pushButtonConfirm_clicked() {
+    if (!validateCredentials()) return;
+
+    currentLogin = ui->lineEditLogin->text().trimmed();
+
+    // Запрашиваем код восстановления
+    receivedCode = NetworkClient::instance()->requestRecoveryCode(currentLogin);
+
+    if (receivedCode.isEmpty()) {
+        showError("Ошибка отправки", "Не удалось отправить код восстановления. Проверьте правильность логина и повторите попытку");
+        return;
+    }
+
+    // Переходим к шагу ввода кода
+    currentStep = StepCode;
+    updateUI();
+    showInfo("Код отправлен", "Код восстановления был отправлен на вашу электронную почту. Пожалуйста, проверьте почтовый ящик.");
 }
 
-// Переход по шагам
-void passwordrecoveryform::on_pushButtonNext_clicked() {
-    if (ui->lineEditLogin->isVisible()) {
-        // Шаг 1: Ввод логина
-        if (ui->lineEditLogin->text().isEmpty()) {
-            showError("Неверный логин", "Заполните поле для логина!");
-            return;
-        }
-        if (!isValidLogin(ui->lineEditLogin->text())) {
-            showError("Неверный логин", "Введите корректный логин!");
-            return;
-        }
-        sendCode();
-        ui->lineEditCode->setVisible(true);
-        ui->labelCode->setVisible(true);  // Показать лейбл для кода
-        ui->pushButtonNext->setText("Далее");
-    } else if (ui->lineEditCode->isVisible()) {
-        // Шаг 2: Ввод кода
-        if (ui->lineEditCode->text().isEmpty()) {
-            showError("Неверный код", "Заполните поле для кода!");
-            return;
-        }
-        // Проверяем код, отправленный на сервер
-        bool isCodeValid = NetworkClient::instance()->verifyRecoveryCode(ui->lineEditCode->text());
-        if (!isCodeValid) {
-            showError("Неверный код", "Неверный код!");
-            return;
-        }
+void passwordrecoveryform::on_pushButtonRecover_clicked() {
+    QString enteredCode = ui->lineEditCode->text().trimmed();
 
-        ui->lineEditPassword->setVisible(true);
-        ui->lineEditPasswordCheck->setVisible(true);
-        ui->labelPassword->setVisible(true);  // Показать лейбл для пароля
-        ui->labelPasswordCheck->setVisible(true); // Показать лейбл для подтверждения пароля
-        ui->pushButtonNext->setText("Сохранить");
+    if (enteredCode.isEmpty()) {
+        showError("Ошибка ввода", "Пожалуйста, введите код подтверждения, который вы получили по электронной почте");
+        ui->lineEditCode->setFocus();
+        return;
+    }
+
+    if (enteredCode != receivedCode) {
+        showError("Ошибка проверки", "Введённый код не совпадает с отправленным. Пожалуйста, проверьте код и попробуйте снова");
+        ui->lineEditCode->setFocus();
+        ui->lineEditCode->selectAll();
+        return;
+    }
+
+    QString password = ui->lineEditPassword->text();
+
+    if (NetworkClient::instance()->changePassword(currentLogin, password)) {
+        showInfo("Пароль изменен", "Ваш пароль был успешно изменён! Теперь вы можете войти в систему, используя новый пароль");
+        emit switchToAuthForm();
+        close();
+    } else {
+        showError("Ошибка восстановления", "Не удалось изменить пароль. Пожалуйста, повторите попытку позже");
     }
 }
 
-// Сохранение нового пароля
-void passwordrecoveryform::on_pushButtonSave_clicked() {
-    if (checkPasswordMatch()) {
-        recoverPassword();
-    }
-}
-
-// Показываем форму
 void passwordrecoveryform::slot_show() {
-    this->show();  // Показываем форму восстановления
+    currentStep = StepCredentials;
+
+    // Очищаем поля
+    ui->lineEditPassword->clear();
+    ui->lineEditPasswordCheck->clear();
+    ui->lineEditCode->clear();
+
+    // Разблокируем все поля
+    ui->lineEditLogin->setReadOnly(false);
+    ui->lineEditPassword->setReadOnly(false);
+    ui->lineEditPasswordCheck->setReadOnly(false);
+
+    // Восстанавливаем стандартный цвет
+    ui->lineEditLogin->setPalette(QPalette());
+    ui->lineEditPassword->setPalette(QPalette());
+    ui->lineEditPasswordCheck->setPalette(QPalette());
+
+    // Восстанавливаем скрытый ввод пароля (точки)
+    ui->lineEditPassword->setEchoMode(QLineEdit::Password);
+    ui->lineEditPasswordCheck->setEchoMode(QLineEdit::Password);
+
+    updateUI();
+    show();
 }

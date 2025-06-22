@@ -85,7 +85,7 @@ public:
         labelLogin_2->setFont(font1);
         layoutWidget = new QWidget(AuthRegForm);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(300, 240, 403, 175));
+        layoutWidget->setGeometry(QRect(280, 240, 451, 175));
         gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName("gridLayout");
         gridLayout->setContentsMargins(0, 0, 0, 0);

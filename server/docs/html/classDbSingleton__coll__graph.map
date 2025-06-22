@@ -1,4 +1,0 @@
-<map id="DbSingleton" name="DbSingleton">
-<area shape="rect" id="Node000001" title="Паттерн Singleton для управления подключением к БД." alt="" coords="5,5,116,160"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="117,52,135,61,141,70,143,83,140,96,134,106,130,103,136,94,138,83,136,72,132,65,115,56"/>
-</map>

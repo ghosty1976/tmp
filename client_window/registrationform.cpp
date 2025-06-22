@@ -1,226 +1,305 @@
 #include "registrationform.h"
 #include "ui_registrationform.h"
-#include <QMessageBox>
+#include "networkclient.h"
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
-#include "networkclient.h"
+#include <QPalette>
 
 RegistrationForm::RegistrationForm(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::RegistrationForm)
+    ui(new Ui::RegistrationForm),
+    currentStep(StepCredentials)
 {
-    ui->setupUi(this); // Инициализация UI
-    setWindowTitle("Регистрация пользователя"); // Название окна
+    ui->setupUi(this);
+    setWindowTitle("Регистрация пользователя");
 
-    // Устанавливаем фокус на поле почты
-    ui->lineEditMail->setFocus();
+    // Валидатор для логина и пароля: только английские буквы и цифры
+    QRegularExpression regexAlnum("^[a-zA-Z0-9]+$");
+    ui->lineEditLogin->setValidator(new QRegularExpressionValidator(regexAlnum, this));
+    ui->lineEditPassword->setValidator(new QRegularExpressionValidator(regexAlnum, this));
+    ui->lineEditPasswordCheck->setValidator(new QRegularExpressionValidator(regexAlnum, this));
+    ui->lineEditCode->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{6}$"), this));
 
-    // Подключение слотов к кнопкам
-    connect(ui->pushButtonNext, &QPushButton::clicked, this, &RegistrationForm::on_pushButtonNext_clicked);
-    connect(ui->pushButtonCreateAccount, &QPushButton::clicked, this, &RegistrationForm::on_pushButtonCreateAccount_clicked);
-    connect(ui->pushButtonBackToAuth, &QPushButton::clicked, this, &RegistrationForm::on_pushButtonBackToAuth_clicked); // Слот для кнопки назад
+    // Валидатор для email: английские буквы, цифры и основные символы
+    QRegularExpression regexEmail("[a-zA-Z0-9._%+-@]+");
+    ui->lineEditMail->setValidator(new QRegularExpressionValidator(regexEmail, this));
 
-    // Настройка проверки ввода английскими буквами и цифрами для логина и пароля
-    QRegularExpression regex("^[a-zA-Z0-9]+$");
-    QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
-    ui->lineEditLogin->setValidator(validator);
-    ui->lineEditPassword->setValidator(validator);
-    ui->lineEditPasswordCheck->setValidator(validator);
-
-    // Настройка поля для ввода кода (только цифры)
-    QRegularExpression codeRegex("^[0-9]+$");
-    QRegularExpressionValidator *codeValidator = new QRegularExpressionValidator(codeRegex, this);
-    ui->lineEditCode->setValidator(codeValidator);
-
-    // Устанавливаем скрытие текста для полей пароля
+    // Скрытый ввод пароля
     ui->lineEditPassword->setEchoMode(QLineEdit::Password);
     ui->lineEditPasswordCheck->setEchoMode(QLineEdit::Password);
 
-    // Скрываем все поля и лейблы, кроме почты
-    ui->lineEditCode->setVisible(false);
-    ui->lineEditLogin->setVisible(false);
-    ui->lineEditPassword->setVisible(false);
-    ui->lineEditPasswordCheck->setVisible(false);
-    ui->pushButtonCreateAccount->setVisible(false);
+    // Placeholder'ы
+    ui->lineEditMail->setPlaceholderText("...");
+    ui->lineEditLogin->setPlaceholderText("...");
+    ui->lineEditPassword->setPlaceholderText("...");
+    ui->lineEditPasswordCheck->setPlaceholderText("...");
+    ui->lineEditCode->setPlaceholderText("...");
 
-    ui->labelMail->setVisible(true); // Лейбл для почты
-    ui->labelCode->setVisible(false); // Лейбл для кода
-    ui->labelLogin->setVisible(false); // Лейбл для логина
-    ui->labelPassword->setVisible(false); // Лейбл для пароля
-    ui->labelPasswordCheck->setVisible(false); // Лейбл для подтверждения пароля
+    // Установка фильтра событий
+    ui->lineEditMail->installEventFilter(this);
+    ui->lineEditLogin->installEventFilter(this);
+    ui->lineEditPassword->installEventFilter(this);
+    ui->lineEditPasswordCheck->installEventFilter(this);
+    ui->lineEditCode->installEventFilter(this);
 
-    ui->lineEditMail->setPlaceholderText("Введите ваш email");  // Подсказка для поля email
-    ui->lineEditLogin->setPlaceholderText("Введите логин");     // Подсказка для поля логина
-    ui->lineEditPassword->setPlaceholderText("Введите пароль"); // Подсказка для поля пароля
-    ui->lineEditPasswordCheck->setPlaceholderText("Подтвердите пароль"); // Подсказка для поля подтверждения пароля
-    ui->lineEditCode->setPlaceholderText("Введите код");      // Подсказка для поля кода
+    // Обновляем интерфейс
+    updateUI();
 }
 
-RegistrationForm::~RegistrationForm() {
+RegistrationForm::~RegistrationForm()
+{
     delete ui;
 }
 
-// Отображение ошибки с названием окна
-void RegistrationForm::showError(const QString& title, const QString& message) {
+void RegistrationForm::slot_show()
+{
+    currentStep = StepCredentials;
+
+    // Очищаем поля
+    ui->lineEditMail->clear();
+    ui->lineEditLogin->clear();
+    ui->lineEditPassword->clear();
+    ui->lineEditPasswordCheck->clear();
+    ui->lineEditCode->clear();
+
+    // Разблокируем все поля
+    ui->lineEditMail->setReadOnly(false);
+    ui->lineEditLogin->setReadOnly(false);
+    ui->lineEditPassword->setReadOnly(false);
+    ui->lineEditPasswordCheck->setReadOnly(false);
+
+    // Восстанавливаем стандартный цвет
+    ui->lineEditMail->setPalette(QPalette());
+    ui->lineEditLogin->setPalette(QPalette());
+    ui->lineEditPassword->setPalette(QPalette());
+    ui->lineEditPasswordCheck->setPalette(QPalette());
+
+    updateUI();
+    show();
+}
+
+void RegistrationForm::lockFields()
+{
+    ui->lineEditMail->setReadOnly(true);
+    ui->lineEditLogin->setReadOnly(true);
+    ui->lineEditPassword->setReadOnly(true);
+    ui->lineEditPasswordCheck->setReadOnly(true);
+
+    QPalette palette;
+    palette.setColor(QPalette::Base, Qt::white);
+    ui->lineEditMail->setPalette(palette);
+    ui->lineEditLogin->setPalette(palette);
+    ui->lineEditPassword->setPalette(palette);
+    ui->lineEditPasswordCheck->setPalette(palette);
+}
+
+bool RegistrationForm::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
+            if (obj == ui->lineEditMail) {
+                ui->lineEditLogin->setFocus();
+                return true;
+            } else if (obj == ui->lineEditLogin) {
+                ui->lineEditPassword->setFocus();
+                return true;
+            } else if (obj == ui->lineEditPassword) {
+                ui->lineEditPasswordCheck->setFocus();
+                return true;
+            } else if (obj == ui->lineEditPasswordCheck) {
+                if (currentStep == StepCredentials) {
+                    on_pushButtonNext_clicked();
+                    return true;
+                }
+            } else if (obj == ui->lineEditCode) {
+                if (currentStep == StepCode) {
+                    on_pushButtonCreateAccount_clicked();
+                    return true;
+                }
+            }
+        }
+    }
+    return QDialog::eventFilter(obj, event);
+}
+
+void RegistrationForm::showError(const QString& title, const QString& message)
+{
     QMessageBox::warning(this, title, message);
 }
 
-// Настройка перехода между полями (Enter)
-void RegistrationForm::setupFieldFocus() {
-    setTabOrder(ui->lineEditMail, ui->lineEditCode);  // Переход между полями почты и кода
-    setTabOrder(ui->lineEditCode, ui->lineEditLogin);  // Переход к логину
-    setTabOrder(ui->lineEditLogin, ui->lineEditPassword);  // Переход к паролю
-    setTabOrder(ui->lineEditPassword, ui->lineEditPasswordCheck);  // Переход к подтверждению пароля
-    setTabOrder(ui->lineEditPasswordCheck, ui->pushButtonNext);  // Переход к кнопке "Далее"
+void RegistrationForm::showInfo(const QString& title, const QString& message)
+{
+    QMessageBox::information(this, title, message);
 }
 
-// Проверка на корректность почты
-bool RegistrationForm::isValidEmail(const QString& email) {
-    QRegularExpression regex("^\\S+@\\S+\\.\\S+$"); // Проверка на стандартный формат почты
-    return regex.match(email).hasMatch();  // Проверяем, что почта соответствует регулярному выражению
-}
+void RegistrationForm::updateUI()
+{
+    // Управление фокусом без двойных курсоров
+    ui->lineEditMail->clearFocus();
+    ui->lineEditLogin->clearFocus();
+    ui->lineEditPassword->clearFocus();
+    ui->lineEditPasswordCheck->clearFocus();
+    ui->lineEditCode->clearFocus();
 
-// Проверка на английские буквы и цифры
-bool RegistrationForm::isEnglishAndDigitInput(const QString &input) {
-    QRegularExpression regex("^[a-zA-Z0-9]+$");
-    return regex.match(input).hasMatch();  // Проверяем, что ввод состоит только из английских букв и цифр
-}
+    switch(currentStep) {
+    case StepCredentials:
+        ui->lineEditCode->setVisible(false);
+        ui->labelCode->setVisible(false);
+        ui->pushButtonCreateAccount->setVisible(false);
+        ui->pushButtonNext->setVisible(true);
+        ui->pushButtonNext->setText("ПОДТВЕРДИТЬ");
 
-// Отправка кода на почту
-void RegistrationForm::sendCode() {
-    QString email = ui->lineEditMail->text();
-    if (email.isEmpty()) {
-        showError("Пустое поле для почты", "Пожалуйста, заполните поле для почты.");
-        return;
-    }
+        // Разблокируем основные поля
+        ui->lineEditMail->setEnabled(true);
+        ui->lineEditLogin->setEnabled(true);
+        ui->lineEditPassword->setEnabled(true);
+        ui->lineEditPasswordCheck->setEnabled(true);
 
-    // Отправляем запрос на сервер для генерации и отправки кода
-    bool success = NetworkClient::instance()->sendRecoveryCode(email); // Метод отправки на сервер
-    if (success) {
-        QMessageBox::information(this, "Код отправлен", "Код был отправлен на вашу почту.");
-    } else {
-        showError("Ошибка при отправке кода", "Не удалось отправить код на почту.");
-    }
-}
+        // Фокус на поле email
+        ui->lineEditMail->setFocus();
+        break;
 
-// Проверка паролей на совпадение
-bool RegistrationForm::checkPasswordMatch() {
-    if (ui->lineEditPassword->text() != ui->lineEditPasswordCheck->text()) {
-        showError("Пароли не совпадают", "Пожалуйста, введите одинаковые пароли.");
-        return false;
-    }
-    return true;
-}
-
-// Проверка логина на допустимую длину
-bool RegistrationForm::isValidLogin(const QString &login) {
-    if (login.length() < 3 || login.length() > 20) {
-        showError("Неверный логин", "Логин должен быть от 3 до 20 символов.");
-        return false;
-    }
-    return true;
-}
-
-// Проверка доступности логина
-bool RegistrationForm::isLoginAvailable(const QString &login) {
-    return NetworkClient::instance()->checkLoginExists(login); // Проверка доступности логина
-}
-
-// Переход по шагам
-void RegistrationForm::on_pushButtonNext_clicked() {
-    if (ui->lineEditMail->isVisible()) {
-        // Шаг 1: Ввод почты
-        if (ui->lineEditMail->text().isEmpty()) {
-            showError("Пустое поле для почты", "Пожалуйста, заполните поле для почты.");
-            return;
-        }
-        if (!isValidEmail(ui->lineEditMail->text())) {
-            showError("Неверный email", "Введите корректный email.");
-            return;
-        }
-        sendCode();
+    case StepCode:
         ui->lineEditCode->setVisible(true);
-        ui->labelCode->setVisible(true);  // Показать лейбл для кода
-        ui->pushButtonNext->setText("Далее");
-    } else if (ui->lineEditCode->isVisible()) {
-        // Шаг 2: Ввод кода
-        if (ui->lineEditCode->text().isEmpty()) {
-            showError("Пустое поле для кода", "Пожалуйста, заполните поле для кода.");
-            return;
-        }
+        ui->labelCode->setVisible(true);
+        ui->pushButtonCreateAccount->setVisible(true);
+        ui->pushButtonNext->setText("Отправить код повторно");
 
-        // Проверяем код, отправленный на сервер
-        bool isCodeValid = NetworkClient::instance()->verifyRecoveryCode(ui->lineEditCode->text());
-        if (!isCodeValid) {
-            showError("Неверный код", "Вы ввели неправильный код. Пожалуйста, перепроверьте код.");
-            return;
-        }
+        // Блокируем основные поля с белым фоном
+        lockFields();
 
-        ui->lineEditLogin->setVisible(true);
-        ui->labelLogin->setVisible(true);  // Показать лейбл для логина
-        ui->pushButtonNext->setText("Далее");
-    } else if (ui->lineEditLogin->isVisible()) {
-        // Шаг 3: Ввод логина
-        if (ui->lineEditLogin->text().isEmpty()) {
-            showError("Пустое поле для логина", "Пожалуйста, заполните поле для логина.");
-            return;
-        }
-        if (!isValidLogin(ui->lineEditLogin->text())) {
-            showError("Неверный логин", "Введите корректный логин.");
-            return;
-        }
-
-        // Проверяем доступность логина
-        if (!isLoginAvailable(ui->lineEditLogin->text())) {
-            showError("Неверный логин", "Такого логина не существует.");
-            return;
-        }
-
-        ui->lineEditPassword->setVisible(true);
-        ui->labelPassword->setVisible(true);  // Показать лейбл для пароля
-        ui->pushButtonNext->setText("Далее");
-    } else if (ui->lineEditPassword->isVisible()) {
-        // Шаг 4: Ввод пароля
-        if (ui->lineEditPassword->text().isEmpty()) {
-            showError("Пустое поле для пароля", "Пожалуйста, заполните поле для пароля.");
-            return;
-        }
-        ui->lineEditPasswordCheck->setVisible(true);
-        ui->labelPasswordCheck->setVisible(true);  // Показать лейбл для подтверждения пароля
-        ui->pushButtonNext->setText("Сохранить");
-    } else if (ui->lineEditPasswordCheck->isVisible()) {
-        // Шаг 5: Ввод подтверждения пароля
-        if (ui->lineEditPasswordCheck->text().isEmpty()) {
-            showError("Пустое поле для подтверждения пароля", "Пожалуйста, подтвердите пароль.");
-            return;
-        }
-        // Перейдем к созданию учетной записи
-        on_pushButtonCreateAccount_clicked();
+        // Фокус на поле кода
+        ui->lineEditCode->setFocus();
+        break;
     }
 }
 
-// Создание учётной записи
-void RegistrationForm::on_pushButtonCreateAccount_clicked() {
+bool RegistrationForm::validateCredentials()
+{
+    QString email = ui->lineEditMail->text().trimmed();
+    QString login = ui->lineEditLogin->text().trimmed();
     QString password = ui->lineEditPassword->text();
-    if (password.length() < 5 || password.length() > 15) {
-        showError("Недопустимая длина пароля", "Пароль должен быть от 5 до 15 символов.");
-        return;
+    QString passwordCheck = ui->lineEditPasswordCheck->text();
+
+    // Проверка email
+    if (email.isEmpty()) {
+        showError("Ошибка ввода", "Пожалуйста, введите ваш email");
+        return false;
     }
 
-    if (checkPasswordMatch()) {
-        // Реализуем регистрацию на сервере
-        bool success = NetworkClient::instance()->registerUser(ui->lineEditLogin->text(), ui->lineEditPassword->text(), ui->lineEditMail->text());
-        if (success) {
-            QMessageBox::information(this, "Регистрация", "Учётная запись создана!");
-            this->close();  // Закрываем форму после регистрации
-            emit switchToAuthForm();  // Переход на форму авторизации
-        } else {
-            showError("Ошибка регистрации", "Ошибка при регистрации.");
+    QRegularExpression regexEmail("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+    if (!regexEmail.match(email).hasMatch()) {
+        showError("Ошибка ввода", "Введите корректный email адрес");
+        return false;
+    }
+
+    // Проверка занятости email
+    if (NetworkClient::instance()->emailExists(email)) {
+        showError("Ошибка регистрации", "Этот email уже зарегистрирован");
+        return false;
+    }
+
+    // Проверка логина
+    if (login.isEmpty()) {
+        showError("Ошибка ввода", "Введите ваш логин");
+        return false;
+    }
+
+    if (login.length() < 3 || login.length() > 20) {
+        showError("Ошибка ввода", "Логин должен быть от 3 до 20 символов");
+        return false;
+    }
+
+    // Проверка занятости логина
+    if (NetworkClient::instance()->checkLoginExists(login)) {
+        showError("Ошибка регистрации", "Этот логин уже занят");
+        return false;
+    }
+
+    // Проверка пароля
+    if (password.length() < 5 || password.length() > 15) {
+        showError("Ошибка ввода", "Пароль должен быть от 5 до 15 символов");
+        return false;
+    }
+
+    if (password != passwordCheck) {
+        showError("Ошибка ввода", "Пароли не совпадают");
+        return false;
+    }
+
+    return true;
+}
+
+bool RegistrationForm::validateCode()
+{
+    QString enteredCode = ui->lineEditCode->text().trimmed();
+
+    if (enteredCode.isEmpty()) {
+        showError("Ошибка ввода", "Введите код из письма");
+        return false;
+    }
+
+    if (enteredCode != receivedCode) {
+        showError("Ошибка ввода", "Неверный код подтверждения");
+        return false;
+    }
+
+    return true;
+}
+
+void RegistrationForm::on_pushButtonNext_clicked()
+{
+    if (currentStep == StepCredentials) {
+        if (validateCredentials()) {
+            QString email = ui->lineEditMail->text().trimmed();
+            receivedCode = NetworkClient::instance()->requestRegisterCode(email);
+
+            if (receivedCode.isEmpty()) {
+                showError("Ошибка регистрации", "Не удалось отправить код на указанный email");
+                return;
+            }
+
+            showInfo("Код отправлен", "Код подтверждения отправлен на вашу почту");
+            currentStep = StepCode;
+            updateUI();
         }
+    } else if (currentStep == StepCode) {
+        // Повторная отправка кода
+        QString email = ui->lineEditMail->text().trimmed();
+        receivedCode = NetworkClient::instance()->requestRegisterCode(email);
+
+        if (receivedCode.isEmpty()) {
+            showError("Ошибка", "Не удалось отправить код");
+            return;
+        }
+
+        showInfo("Код отправлен повторно", "Новый код подтверждения отправлен на вашу почту");
     }
 }
 
-// Переход на форму авторизации
-void RegistrationForm::on_pushButtonBackToAuth_clicked() {
-    emit switchToAuthForm();  // Переход на форму авторизации
+
+
+void RegistrationForm::on_pushButtonCreateAccount_clicked()
+{
+    if (!validateCode()) return;
+
+    QString login = ui->lineEditLogin->text().trimmed();
+    QString password = ui->lineEditPassword->text();
+    QString email = ui->lineEditMail->text().trimmed();
+
+    // Убрали параметр code - теперь только 3 параметра
+    if (NetworkClient::instance()->registerUser(login, password, email)) {
+        showInfo("Регистрация завершена", "Учётная запись успешно создана! Теперь вы можете войти в систему");
+        emit switchToAuthForm();
+        close();
+    } else {
+        showError("Ошибка регистрации", "Не удалось завершить регистрацию. Проверьте правильность данных");
+    }
+}
+
+void RegistrationForm::on_pushButtonBackToAuth_clicked()
+{
+    emit switchToAuthForm();
+    close();
 }

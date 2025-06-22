@@ -4,7 +4,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include "networkclient.h"
-#include <QInputDialog>
+#include <QKeyEvent> // Добавлено для обработки событий клавиатуры
 
 AuthRegForm::AuthRegForm(QWidget *parent)
     : QDialog(parent), ui(new Ui::AuthRegForm), authAttempts(0)
@@ -12,12 +12,12 @@ AuthRegForm::AuthRegForm(QWidget *parent)
     ui->setupUi(this);
 
     ui->lineEditPassword->setEchoMode(QLineEdit::Password);
-    ui->lineEditLogin->setPlaceholderText("Введите логин");    // Подсказка для логина
-    ui->lineEditPassword->setPlaceholderText("Введите пароль"); // Подсказка для пароля
+    ui->lineEditLogin->setPlaceholderText("...");    // Подсказка для логина
+    ui->lineEditPassword->setPlaceholderText("..."); // Подсказка для пароля
 
     setupFieldFocus();  // Настройка перехода по полям через Enter
 
-    setWindowTitle("Авторизация"); // Название окна
+    setWindowTitle("АВТОРИЗАЦИЯ"); // Название окна
 
     // Настройка проверки ввода, теперь разрешаем цифры и английские буквы
     QRegularExpression regex("^[a-zA-Z0-9]+$");
@@ -25,14 +25,33 @@ AuthRegForm::AuthRegForm(QWidget *parent)
     ui->lineEditLogin->setValidator(validator);
     ui->lineEditPassword->setValidator(validator);
 
-    // Подключение слотов к кнопкам
-    connect(ui->pushButtonAuth, &QPushButton::clicked, this, &AuthRegForm::on_pushButtonAuth_clicked);
-    connect(ui->pushButtonReg, &QPushButton::clicked, this, &AuthRegForm::on_pushButtonReg_clicked);
-    connect(ui->pushButtonForgotPassword, &QPushButton::clicked, this, &AuthRegForm::on_pushButtonForgotPassword_clicked);
+    // Установка фильтра событий для обработки нажатий клавиш
+    ui->lineEditLogin->installEventFilter(this);
+    ui->lineEditPassword->installEventFilter(this);
 }
 
 AuthRegForm::~AuthRegForm() {
     delete ui;
+}
+
+// Обработчик событий для навигации по Enter
+bool AuthRegForm::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
+            if (obj == ui->lineEditLogin) {
+                // При нажатии Enter в поле логина переходим к полю пароля
+                ui->lineEditPassword->setFocus();
+                return true;
+            } else if (obj == ui->lineEditPassword) {
+                // При нажатии Enter в поле пароля вызываем обработчик авторизации
+                on_pushButtonAuth_clicked();
+                return true;
+            }
+        }
+    }
+    return QDialog::eventFilter(obj, event);
 }
 
 // Показать ошибку с соответствующим названием окна
@@ -128,7 +147,7 @@ void AuthRegForm::on_pushButtonReg_clicked() {
 
 // Восстановление пароля
 void AuthRegForm::on_pushButtonForgotPassword_clicked() {
-    emit recovery_ok(); // Открытие формы восстановления пароля
+    emit openRecoveryForm(ui->lineEditLogin->text());
 }
 
 // Очистка всех полей

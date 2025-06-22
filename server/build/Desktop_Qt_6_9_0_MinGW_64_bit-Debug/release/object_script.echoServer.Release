@@ -1,0 +1,14 @@
+release/main.o
+release/mytcpserver.o
+release/dbsingleton.o
+release/userutils.o
+release/muParser.o
+release/muParserBase.o
+release/muParserError.o
+release/muParserTokenReader.o
+release/muParserBytecode.o
+release/muParserCallback.o
+release/muParserDLL.o
+release/muParserInt.o
+release/muParserTest.o
+release/moc_mytcpserver.o

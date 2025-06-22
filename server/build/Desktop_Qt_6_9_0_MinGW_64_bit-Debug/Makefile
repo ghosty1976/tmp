@@ -305,6 +305,7 @@ Makefile: ../../echoServer.pro ../../../../Qt/6.9.0/mingw_64/mkspecs/win32-g++/q
 		../../../../Qt/6.9.0/mingw_64/mkspecs/features/yacc.prf \
 		../../../../Qt/6.9.0/mingw_64/mkspecs/features/lex.prf \
 		../../echoServer.pro \
+		../../../../Qt/6.9.0/mingw_64/lib/Qt6Qml.prl \
 		../../../../Qt/6.9.0/mingw_64/lib/Qt6Network.prl \
 		../../../../Qt/6.9.0/mingw_64/lib/Qt6Sql.prl \
 		../../../../Qt/6.9.0/mingw_64/lib/Qt6Core.prl \
@@ -545,6 +546,7 @@ Makefile: ../../echoServer.pro ../../../../Qt/6.9.0/mingw_64/mkspecs/win32-g++/q
 ../../../../Qt/6.9.0/mingw_64/mkspecs/features/yacc.prf:
 ../../../../Qt/6.9.0/mingw_64/mkspecs/features/lex.prf:
 ../../echoServer.pro:
+../../../../Qt/6.9.0/mingw_64/lib/Qt6Qml.prl:
 ../../../../Qt/6.9.0/mingw_64/lib/Qt6Network.prl:
 ../../../../Qt/6.9.0/mingw_64/lib/Qt6Sql.prl:
 ../../../../Qt/6.9.0/mingw_64/lib/Qt6Core.prl:

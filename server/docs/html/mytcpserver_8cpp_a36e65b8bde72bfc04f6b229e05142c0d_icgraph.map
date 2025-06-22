@@ -1,7 +1,0 @@
-<map id="getDatabasePath" name="getDatabasePath">
-<area shape="rect" id="Node000001" title=" " alt="" coords="507,5,629,32"/>
-<area shape="rect" id="Node000002" href="$classMyTcpServer.html#ac409e48add8a7ca9c7db829937c6ca95" title="Подключение к БД." alt="" coords="237,5,459,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="491,21,460,21,460,16,491,16"/>
-<area shape="rect" id="Node000003" href="$classMyTcpServer.html#acf367c4695b4d160c7a2d25c2afaaec4" title=" " alt="" coords="5,5,189,32"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,21,189,21,189,16,221,16"/>
-</map>

@@ -1,60 +1,50 @@
 #include "mytcpserver.h"
-#include "userutils.h"
-#include "emailutils.h"
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QRandomGenerator>
 #include <QDebug>
+#include "dbsingleton.h"
 #include <QCoreApplication>
 #include <QDir>
-#include <QRegularExpression>
-extern "C" {
-#include "tinyexpr.h"
-}
+#include <QDateTime>
+#include <QSqlError>
 #include <limits>
-#include <cmath>
 
 QString getDatabasePath() {
-    QString appDir = QCoreApplication::applicationDirPath();
-    QString dbPath = QDir(appDir).filePath("DataBase.db");
+    QDir dir(QCoreApplication::applicationDirPath());
+    dir.cdUp();
+    dir.cdUp();
+    dir.cdUp();
+    QString dbPath = dir.filePath("DataBase.db");
     return QDir(dbPath).absolutePath();
 }
 
-MyTcpServer::MyTcpServer(QObject *parent)
-    : QTcpServer(parent)
+MyTcpServer::MyTcpServer(UserUtils* userUtils, EquationsSolver* eqSolver, QObject *parent)
+    : QTcpServer(parent), m_userUtils(userUtils), m_eqSolver(eqSolver)
 {
-    if (!connectToDatabase()) {
-        qDebug() << "Failed to connect to database!";
+    QString dbPath = getDatabasePath();
+    if (!DbSingleton::instance().openDB(dbPath)) {
+        qInfo() << "[SERVER] Failed to connect to database!";
         return;
     }
     if (this->listen(QHostAddress::Any, 33333)) {
-        qDebug() << "Server listening on port 33333";
+        qInfo() << "[SERVER] Server listening on port 33333";
     } else {
-        qDebug() << "Error starting server: " << this->errorString();
+        qInfo() << "[SERVER] Error starting server:" << this->errorString();
     }
 }
 
 MyTcpServer::~MyTcpServer() {}
 
-bool MyTcpServer::connectToDatabase()
-{
-    QString dbPath = getDatabasePath();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(dbPath);
-    if (!db.open()) {
-        qDebug() << "Error: Unable to connect to the database at" << dbPath << db.lastError().text();
-        return false;
-    }
-    qDebug() << "Database connected successfully at" << dbPath;
-    return true;
-}
-
 void MyTcpServer::incomingConnection(qintptr socketDescriptor)
 {
     mTcpSocket = new QTcpSocket(this);
     if (mTcpSocket->setSocketDescriptor(socketDescriptor)) {
+        qInfo() << "[SERVER] Новый клиент подключился! SocketDescriptor:" << socketDescriptor;
         connect(mTcpSocket, &QTcpSocket::readyRead, this, &MyTcpServer::slotServerRead);
+        connect(mTcpSocket, &QTcpSocket::disconnected, this, [this](){
+            qInfo() << "[SERVER] The client has disconnected!";
+            mTcpSocket->deleteLater();
+        });
     } else {
+        qInfo() << "[SERVER] Failed to initialize socket!";
         delete mTcpSocket;
     }
 }
@@ -67,6 +57,7 @@ void MyTcpServer::slotServerRead()
 
     if (parts.isEmpty()) {
         mTcpSocket->write("ERROR Invalid request\n");
+        qInfo() << "[SERVER] Sent to the client: ERROR Invalid request";
         return;
     }
     QString command = parts[0].toUpper();
@@ -83,284 +74,144 @@ void MyTcpServer::slotServerRead()
     else if (command == "LOGINCHECK" && parts.size() == 2) {
         handleCheckLogin(parts[1]);
     }
-    else if (command == "RECOVERY" && parts.size() == 2) {
-        handleRecovery(parts[1]);
+    else if (command == "REGISTER_CODE" && parts.size() == 2) {
+        handleRegisterCode(parts[1]);
     }
-    else if (command == "VERIFY_CODE" && parts.size() == 2) {
-        handleVerifyCode(parts[1]);
+    else if (command == "RECOVERY_CODE" && parts.size() == 2) {
+        handleRecoveryCode(parts[1]);
     }
-    else if (command == "CHANGE" && parts.size() == 2) {
-        handleChangePassword(parts[1]);
+    else if (command == "CHANGE" && parts.size() == 3) {
+        handleChangePassword(parts[1], parts[2]);
     }
-    else if (command == "SOLUTION" && parts.size() == 5) {
-        handleSolve(parts[1], parts[2].toDouble(), parts[3].toDouble(), parts[4].toInt(), parts[5].toDouble(), parts[6].toInt());
-
+    else if (command == "SOLUTION" && parts.size() == 7) {
+        handleSolve(
+            parts[1],
+            parts[2].toDouble(),
+            parts[3].toDouble(),
+            parts[4].toInt(),
+            parts[5].toDouble(),
+            parts[6].toInt()
+            );
     }
     else {
         mTcpSocket->write("ERROR Unknown command\n");
+        qInfo() << "[SERVER] Sent to client: ERROR Unknown command";
     }
 }
 
-// РЕГИСТРАЦИЯ
 void MyTcpServer::handleRegister(const QString& login, const QString& password, const QString& email)
 {
     QString err;
-    int res = UserUtils::registerUser(login, password, email, err);
-    if (res == 0)
+    int res = m_userUtils->registerUser(login, password, email, err);
+    if (res == 0) {
         mTcpSocket->write("OK Registered\n");
-    else if (res == 1)
+    } else if (res == 1) {
         mTcpSocket->write("ERROR Login already taken\n");
-    else if (res == 2)
+    } else if (res == 2) {
         mTcpSocket->write("ERROR Email already exists\n");
-    else
-        mTcpSocket->write(QString("ERROR Registration failed: %1\n").arg(err).toUtf8());
+    } else {
+        mTcpSocket->write(("ERROR " + err + "\n").toUtf8());
+    }
 }
 
-// АВТОРИЗАЦИЯ
-void MyTcpServer::handleLogin(const QString& login, const QString& password) {
-    if (UserUtils::login(login, password))
+void MyTcpServer::handleLogin(const QString& login, const QString& password)
+{
+    if (m_userUtils->login(login, password)) {
         mTcpSocket->write("OK Logged in\n");
-    else
+    } else {
         mTcpSocket->write("ERROR Invalid login or password\n");
+    }
 }
 
-// ПРОВЕРКА EMAIL
-void MyTcpServer::handleCheckEmail(const QString& email) {
-    if (UserUtils::emailExists(email))
-        mTcpSocket->write("OK Email Exists\n");
-    else
-        mTcpSocket->write("ERROR Email does not exist\n");
-}
-
-// ПРОВЕРКА LOGIN
-void MyTcpServer::handleCheckLogin(const QString& login) {
-    if (UserUtils::loginExists(login))
-        mTcpSocket->write("OK Login Exists\n");
-    else
-        mTcpSocket->write("ERROR Login does not exist\n");
-}
-
-// RECOVERY
-void MyTcpServer::handleRecovery(const QString& identifier)
+void MyTcpServer::handleCheckEmail(const QString& email)
 {
-    QString code = QString::number(QRandomGenerator::global()->bounded(100000, 999999));
-    bool isEmail = identifier.contains("@") || identifier.contains(".");
+    bool exists = m_userUtils->emailExists(email);
+    mTcpSocket->write(exists ? "YES\n" : "NO\n");
+}
 
-    if (isEmail) {
-        if (UserUtils::emailExists(identifier)) {
-            QSqlQuery upd;
-            upd.prepare("UPDATE Users SET restore_code = :code WHERE email = :email");
-            upd.bindValue(":code", code);
-            upd.bindValue(":email", identifier);
-            if (!upd.exec()) {
-                mTcpSocket->write("ERROR Database error\n");
-                return;
-            }
-        } else {
-            // Добавляем новую строку с этим email и restore_code
-            QSqlQuery ins;
-            ins.prepare("INSERT INTO Users (email, restore_code) VALUES (:email, :code)");
-            ins.bindValue(":email", identifier);
-            ins.bindValue(":code", code);
-            if (!ins.exec()) {
-                mTcpSocket->write("ERROR Database error\n");
-                return;
-            }
-        }
-        // Отправляем код на email
-        QString mailErr;
-        if (EmailUtils::sendEmailSSL(identifier, "Recovery Code", "Your code: " + code, mailErr)) {
-            mTcpSocket->write("OK Code Sent");
-        } else {
-            qDebug() << "MAIL SEND ERROR:" << mailErr;
-            mTcpSocket->write("ERROR Failed to send code\n");
-        }
+void MyTcpServer::handleCheckLogin(const QString& login)
+{
+    bool exists = m_userUtils->loginExists(login);
+    mTcpSocket->write(exists ? "YES\n" : "NO\n");
+}
+
+void MyTcpServer::handleRegisterCode(const QString& email)
+{
+    QString code = m_userUtils->generateRandomCode(6);
+    QString error;
+    bool ok = m_userUtils->sendEmailWithCode(email, code, error);
+    if (ok)
+        mTcpSocket->write(("OK Code sent " + code + "\n").toUtf8());
+    else
+        mTcpSocket->write(("ERROR " + error + "\n").toUtf8());
+}
+
+void MyTcpServer::handleRecoveryCode(const QString& login)
+{
+    QString email = m_userUtils->getEmailByLogin(login);
+    if (email.isEmpty()) {
+        mTcpSocket->write("ERROR No such user\n");
         return;
     }
-
-    // === логика если это логин ===
-    QString email;
-    QSqlQuery q;
-    q.prepare("SELECT email FROM Users WHERE login = :login");
-    q.bindValue(":login", identifier);
-    if (!q.exec() || !q.next()) {
-        mTcpSocket->write("ERROR No such login\n");
-        return;
-    }
-    email = q.value(0).toString();
-
-    QSqlQuery setId;
-    setId.prepare("UPDATE Users SET student_id = 55, restore_code = :code WHERE email = :email");
-    setId.bindValue(":code", code);
-    setId.bindValue(":email", email);
-    setId.exec();
-
-    QString mailErr;
-    if (EmailUtils::sendEmailSSL(email, "Recovery Code", "Your code: " + code, mailErr)) {
-        mTcpSocket->write("OK Code Sent\n");
-    } else {
-        mTcpSocket->write("ERROR Failed to send code\n");
-    }
+    QString code = m_userUtils->generateRandomCode(6);
+    QString error;
+    bool ok = m_userUtils->sendEmailWithCode(email, code, error);
+    if (ok)
+        mTcpSocket->write(("OK Code sent " + code + "\n").toUtf8());
+    else
+        mTcpSocket->write(("ERROR " + error + "\n").toUtf8());
 }
 
-
-// VERIFY_CODE
-void MyTcpServer::handleVerifyCode(const QString& code)
+void MyTcpServer::handleChangePassword(const QString& login, const QString& password)
 {
-    QSqlQuery query;
-    query.prepare("SELECT email FROM Users WHERE restore_code = :code");
-    query.bindValue(":code", code);
-    if (query.exec() && query.next()) {
-        // Нашли — удаляем restore_code
-        QString email = query.value(0).toString();
-        QSqlQuery clear;
-        clear.prepare("UPDATE Users SET restore_code = NULL WHERE email = :email");
-        clear.bindValue(":email", email);
-        clear.exec();
-        mTcpSocket->write("OK Code Verified\n");
-    } else {
-        mTcpSocket->write("ERROR Invalid code\n");
-    }
+    bool ok = m_userUtils->changePasswordByLogin(login, password);
+    mTcpSocket->write(ok ? "OK Password Changed" : "ERROR Password not changed\n");
 }
 
-// CHANGE
-void MyTcpServer::handleChangePassword(const QString& password)
-{
-    QSqlQuery query;
-    query.prepare("SELECT email FROM Users WHERE student_id = 55");
-    if (query.exec() && query.next()) {
-        QString email = query.value(0).toString();
-        // Сохраняем новый хэш пароля
-        QString hash = UserUtils::hashPassword(password);
-        QSqlQuery upd;
-        upd.prepare("UPDATE Users SET password = :password, student_id = NULL WHERE email = :email");
-        upd.bindValue(":password", hash);
-        upd.bindValue(":email", email);
-        if (upd.exec())
-            mTcpSocket->write("OK Password Changed\n");
-        else
-            mTcpSocket->write("ERROR Failed to change password\n");
-    } else {
-        mTcpSocket->write("ERROR No user for password change\n");
-    }
-}
-
-// SOLUTION
 void MyTcpServer::handleSolve(const QString& functionText, double a, double b, int methodIndex, double tolerance, int maxIterations)
 {
     QString methodName = (methodIndex == 0) ? "Дихотомия" : "Простая итерация";
     QList<double> roots;
     int iterations = 0;
     bool success = false;
-    double root = 0;
 
     if (methodIndex == 0) {
-        success = findRootDichotomyExpr(functionText, a, b, root, tolerance, maxIterations, iterations);
-        if (success) roots.append(root);
+        roots = m_eqSolver->findAllRootsDichotomy(functionText, a, b, (b - a) / 1000.0, tolerance, maxIterations);
+        success = !roots.isEmpty();
     } else if (methodIndex == 1) {
-        success = findRootIterationExpr(functionText, a, b, root, tolerance, maxIterations, iterations);
-        if (success) roots.append(root);
+        roots = m_eqSolver->findAllRootsIteration(functionText, a, b, tolerance, maxIterations, 20);
+        success = !roots.isEmpty();
     } else {
         mTcpSocket->write("ERROR Invalid method\n");
         return;
     }
 
-    // КРАСИВЫЙ HTML (как раньше)
-    QString html =
-        R"(
-    <div style="font-family:Segoe UI,Arial,sans-serif;max-width:460px;padding:16px 18px;background:#f8fafc;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">
-      <h2 style="margin-top:0;color:#274690;text-align:center;letter-spacing:1px;">Результат решения</h2>
-      <table style="width:100%;margin:18px 0 16px 0;font-size:16px;">
-        <tr><td style="padding:4px 0;"><b>Метод:</b></td><td style="padding:4px 0;color:#4376b1;">%1</td></tr>
-        <tr><td style="padding:4px 0;"><b>Интервал:</b></td><td style="padding:4px 0;">[%2, %3]</td></tr>
-        <tr><td style="padding:4px 0;"><b>Точность:</b></td><td style="padding:4px 0;">%4</td></tr>
-        <tr><td style="padding:4px 0;"><b>Количество итераций:</b></td><td style="padding:4px 0;">%5</td></tr>
-        <tr><td style="padding:4px 0;"><b>Ответ:</b></td>
-          <td style="padding:4px 0;color:#25653d;font-weight:bold;">%6</td>
-        </tr>
-      </table>
-    </div>
-    )";
+    QStringList rootStrings;
+    for (double r : roots)
+        rootStrings << QString::number(r, 'g', 12);
 
-    QString answer;
-    if (success) {
-        answer = QString("x = %1").arg(root, 0, 'g', 12);
-    } else {
-        answer = "Нет корней на этом интервале";
-    }
+    QString resultText = success
+                             ? QString("x = <b>%1</b>").arg(rootStrings.join(", "))
+                             : "<span style='color:red;'>Нет корней</span>";
 
-    QString htmlReady = html.arg(
-        methodName,
-        QString::number(a), QString::number(b),
-        QString::number(tolerance),
-        QString::number(iterations),
-        answer
-        );
+    QString html = QString(
+                       "<div style='font-family: Arial, sans-serif;'>"
+                       "<h3 style='color: #2a2a2a;'>Решение уравнения</h3>"
+                       "<p><b>Уравнение:</b> <code>%1 = 0</code></p>"
+                       "<p><b>Метод:</b> %2</p>"
+                       "<p><b>Интервал:</b> [%3, %4]</p>"
+                       "<p><b>Точность:</b> %5</p>"
+                       "<p><b>Ответ:</b> %6</p>"
+                       "<p><b>Итераций:</b> %7</p>"
+                       "</div>")
+                       .arg(functionText)
+                       .arg(methodName)
+                       .arg(a)
+                       .arg(b)
+                       .arg(tolerance)
+                       .arg(resultText)
+                       .arg(methodIndex == 0 ? "-" : QString::number(iterations));
 
-    QString response = "OK Solution\n" + htmlReady + "\n";
+    QString response = "OK Solution\n" + html + "\n";
     mTcpSocket->write(response.toUtf8());
 }
-
-
-double MyTcpServer::evalExpression(const QString& expr, double x)
-{
-    // tinyexpr поддерживает переменную x
-    te_variable vars[] = { {"x", &x} };
-    int err = 0;
-    te_expr *expression = te_compile(expr.toUtf8().constData(), vars, 1, &err);
-    if (!expression) {
-        return std::numeric_limits<double>::quiet_NaN();
-    }
-    double result = te_eval(expression);
-    te_free(expression);
-    return result;
-}
-
-
-
-bool MyTcpServer::findRootDichotomyExpr(const QString& func, double a, double b, double& root, double tol, int maxIter, int& iters) {
-    double fa = evalExpression(func, a);
-    double fb = evalExpression(func, b);
-    if (std::isnan(fa) || std::isnan(fb) || fa * fb > 0) return false;
-    double mid = 0;
-    iters = 0;
-    for (; iters < maxIter; ++iters) {
-        mid = 0.5 * (a + b);
-        double fmid = evalExpression(func, mid);
-        if (std::isnan(fmid)) return false;
-        if (fabs(fmid) < tol || fabs(b - a) < tol)
-            break;
-        if (fa * fmid < 0) {
-            b = mid;
-            fb = fmid;
-        } else {
-            a = mid;
-            fa = fmid;
-        }
-    }
-    root = 0.5 * (a + b);
-    return true;
-}
-
-bool MyTcpServer::findRootIterationExpr(const QString& func, double a, double b, double& root, double tol, int maxIter, int& iters) {
-    double x0 = (a + b) / 2.0;
-    double x1 = x0;
-    iters = 0;
-    for (; iters < maxIter; ++iters) {
-        double fx = evalExpression(func, x0);
-        // Производная численно (центральная разность)
-        double h = 1e-6;
-        double dfx = (evalExpression(func, x0 + h) - evalExpression(func, x0 - h)) / (2 * h);
-        double M = fabs(dfx) > tol ? fabs(dfx) : 1.0;
-        x1 = x0 - fx / M;
-        if (x1 < a) x1 = a;
-        if (x1 > b) x1 = b;
-        if (fabs(x1 - x0) < tol)
-            break;
-        x0 = x1;
-    }
-    if (fabs(evalExpression(func, x1)) > tol * 10) return false;
-    root = x1;
-    return true;
-}
-

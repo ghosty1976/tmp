@@ -1,75 +1,36 @@
-/**
- * @file functions_for_client.h
- * @brief Заголовочный файл с функциями для клиентской части приложения.
- *
- * Этот файл содержит объявления функций, используемых для взаимодействия
- * с сервером, включая авторизацию, регистрацию, восстановление пароля
- * и решение уравнений.
- */
-
 #ifndef FUNCTIONS_FOR_CLIENT_H
 #define FUNCTIONS_FOR_CLIENT_H
 
 #include <QString>
 
-/**
- * @brief Проверяет авторизационные данные пользователя на сервере.
- * @param login Логин пользователя.
- * @param password Пароль пользователя.
- * @return true, если авторизация успешна, иначе false.
- */
-bool auth(QString login, QString password);
+// Авторизация пользователя на сервере
+bool auth(const QString& login, const QString& password);
 
-/**
- * @brief Регистрирует нового пользователя на сервере.
- * @param login Логин пользователя.
- * @param password Пароль пользователя.
- * @param email Электронная почта пользователя.
- * @return true, если регистрация успешна, иначе false.
- */
-bool reg(QString login, QString password, QString email);
+// Регистрация нового пользователя (только 3 параметра)
+bool regUser(const QString& login, const QString& password, const QString& email);
 
-/**
- * @brief Проверяет валидность email через сервер.
- * @param email Электронная почта для проверки.
- * @return true, если email валиден, иначе false.
- */
-bool email(QString email);
+// Запрос кода подтверждения регистрации по email
+QString requestRegisterCode(const QString& email);
 
-/**
- * @brief Отправляет код восстановления пароля на указанную почту.
- * @param email Электронная почта пользователя.
- * @return true, если код отправлен успешно, иначе false.
- */
-bool sendRecoveryCode(QString email);
+// Запрос кода восстановления пароля по login
+QString requestRecoveryCode(const QString& login);
 
-/**
- * @brief Изменяет пароль пользователя через сервер.
- * @param newPassword Новый пароль.
- * @return true, если пароль изменен успешно, иначе false.
- */
-bool changePassword(QString newPassword);
+// Проверка, существует ли email на сервере
+bool emailExists(const QString& email);
 
-/**
- * @brief Решает уравнение с заданными параметрами.
- * @param functionText Текст функции для решения.
- * @param a Начальная точка интервала.
- * @param b Конечная точка интервала.
- * @param methodIndex Индекс выбранного метода решения.
- * @return true, если решение найдено, иначе false.
- */
-bool solveEquation(QString functionText, double a, double b, int methodIndex);
+// Проверка, существует ли логин на сервере
+bool loginExists(const QString& login);
 
-/**
- * @brief Отправляет данные на сервер для решения уравнения.
- * @param functionText Текст функции для решения.
- * @param a Начальная точка интервала.
- * @param b Конечная точка интервала.
- * @param methodIndex Индекс выбранного метода решения.
- * @param tolerance Допустимая погрешность.
- * @param maxIterations Максимальное количество итераций.
- * @return true, если данные отправлены успешно, иначе false.
- */
-bool sendToServer(const QString& functionText, double a, double b, int methodIndex, double tolerance, int maxIterations);
+// Смена пароля для пользователя
+bool changeUserPassword(const QString& login, const QString& newPassword);
+
+// Отправка задачи решения уравнения на сервер
+// Возвращает HTML-контент с решением или пустую строку при ошибке
+QString solveEquation(const QString& functionText,
+                      double a,
+                      double b,
+                      int methodIndex,
+                      double tolerance,
+                      int maxIterations);
 
 #endif // FUNCTIONS_FOR_CLIENT_H

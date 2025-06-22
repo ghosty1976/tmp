@@ -1,7 +1,6 @@
 #include "managerformss.h"
 #include "mainwindow.h"
 #include <QApplication>
-#include "networkclient.h"
 
 int main(int argc, char **argv)
 {

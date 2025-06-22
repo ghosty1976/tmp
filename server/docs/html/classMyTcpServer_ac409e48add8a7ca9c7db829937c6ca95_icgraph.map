@@ -1,5 +1,0 @@
-<map id="MyTcpServer::connectToDatabase" name="MyTcpServer::connectToDatabase">
-<area shape="rect" id="Node000001" title="Подключение к БД." alt="" coords="237,5,459,32"/>
-<area shape="rect" id="Node000002" href="$classMyTcpServer.html#acf367c4695b4d160c7a2d25c2afaaec4" title=" " alt="" coords="5,5,189,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,21,189,21,189,16,221,16"/>
-</map>

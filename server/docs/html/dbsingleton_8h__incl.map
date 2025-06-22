@@ -1,5 +1,0 @@
-<map id="dbsingleton.h" name="dbsingleton.h">
-<area shape="rect" id="Node000001" title="Singleton для работы с базой данных (SQLite/MySQL)." alt="" coords="9,5,108,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,112,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,33,61,64,56,64,56,33"/>
-</map>

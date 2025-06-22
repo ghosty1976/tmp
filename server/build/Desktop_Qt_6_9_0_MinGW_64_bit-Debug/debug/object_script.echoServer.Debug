@@ -1,0 +1,14 @@
+debug/main.o
+debug/mytcpserver.o
+debug/dbsingleton.o
+debug/userutils.o
+debug/muParser.o
+debug/muParserBase.o
+debug/muParserError.o
+debug/muParserTokenReader.o
+debug/muParserBytecode.o
+debug/muParserCallback.o
+debug/muParserDLL.o
+debug/muParserInt.o
+debug/muParserTest.o
+debug/moc_mytcpserver.o

@@ -1,5 +1,0 @@
-<map id="MyTcpServer::slotServerRead" name="MyTcpServer::slotServerRead">
-<area shape="rect" id="Node000001" title="Чтение данных от клиента." alt="" coords="278,5,474,32"/>
-<area shape="rect" id="Node000002" href="$classMyTcpServer.html#ac813395e1854be34f2177262d9a5013a" title="Обработчик новых подключений." alt="" coords="5,5,230,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,21,230,21,230,16,262,16"/>
-</map>

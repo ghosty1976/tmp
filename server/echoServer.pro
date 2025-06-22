@@ -1,32 +1,27 @@
 QT -= gui
 
-QT += core network sql
+QT += core network sql qml
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
-SOURCES += tinyexpr.c
-HEADERS += tinyexpr.h
-
-
 DEFINES += QT_DEPRECATED_WARNINGS
-
-QT += network
 
 SOURCES += \
     main.cpp \
-    mytcpserver.cpp \
     dbsingleton.cpp \
-    emailutils.cpp \
-    userutils.cpp
+    userutils.cpp \
+    equationssolver.cpp \
+    mytcpserver.cpp
 
 HEADERS += \
-    mytcpserver.h \
     dbsingleton.h \
-    emailutils.h \
-    userutils.h
+    userutils.h \
+    equationssolver.h \
+    mytcpserver.h
 
 # Директории для сборки по умолчанию
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+

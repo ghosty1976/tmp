@@ -46,6 +46,7 @@ template <> constexpr inline auto AuthRegForm::qt_create_metaobjectdata<qt_meta_
         "switchToMainWindow",
         "switchToRegistrationForm",
         "recovery_ok",
+        "openRecoveryForm",
         "on_pushButtonAuth_clicked",
         "on_pushButtonReg_clicked",
         "on_pushButtonForgotPassword_clicked",
@@ -63,14 +64,18 @@ template <> constexpr inline auto AuthRegForm::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SignalData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'recovery_ok'
         QtMocHelpers::SignalData<void()>(6, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'openRecoveryForm'
+        QtMocHelpers::SignalData<void(const QString &)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 3 },
+        }}),
         // Slot 'on_pushButtonAuth_clicked'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButtonReg_clicked'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButtonForgotPassword_clicked'
+        // Slot 'on_pushButtonReg_clicked'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButtonForgotPassword_clicked'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'clear'
-        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -98,10 +103,11 @@ void AuthRegForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->switchToMainWindow(); break;
         case 2: _t->switchToRegistrationForm(); break;
         case 3: _t->recovery_ok(); break;
-        case 4: _t->on_pushButtonAuth_clicked(); break;
-        case 5: _t->on_pushButtonReg_clicked(); break;
-        case 6: _t->on_pushButtonForgotPassword_clicked(); break;
-        case 7: _t->clear(); break;
+        case 4: _t->openRecoveryForm((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->on_pushButtonAuth_clicked(); break;
+        case 6: _t->on_pushButtonReg_clicked(); break;
+        case 7: _t->on_pushButtonForgotPassword_clicked(); break;
+        case 8: _t->clear(); break;
         default: ;
         }
     }
@@ -113,6 +119,8 @@ void AuthRegForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         if (QtMocHelpers::indexOfMethod<void (AuthRegForm::*)()>(_a, &AuthRegForm::switchToRegistrationForm, 2))
             return;
         if (QtMocHelpers::indexOfMethod<void (AuthRegForm::*)()>(_a, &AuthRegForm::recovery_ok, 3))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (AuthRegForm::*)(const QString & )>(_a, &AuthRegForm::openRecoveryForm, 4))
             return;
     }
 }
@@ -136,14 +144,14 @@ int AuthRegForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }
@@ -170,5 +178,11 @@ void AuthRegForm::switchToRegistrationForm()
 void AuthRegForm::recovery_ok()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void AuthRegForm::openRecoveryForm(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1);
 }
 QT_WARNING_POP

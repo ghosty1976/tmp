@@ -39,19 +39,28 @@ template <> constexpr inline auto passwordrecoveryform::qt_create_metaobjectdata
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "passwordrecoveryform",
-        "slot_show",
+        "switchToAuthForm",
         "",
-        "on_pushButtonNext_clicked",
-        "on_pushButtonSave_clicked"
+        "slot_show",
+        "setLogin",
+        "login",
+        "on_pushButtonConfirm_clicked",
+        "on_pushButtonRecover_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'switchToAuthForm'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_show'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'on_pushButtonNext_clicked'
-        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButtonSave_clicked'
-        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'setLogin'
+        QtMocHelpers::SlotData<void(const QString &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 5 },
+        }}),
+        // Slot 'on_pushButtonConfirm_clicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButtonRecover_clicked'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -75,13 +84,18 @@ void passwordrecoveryform::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
     auto *_t = static_cast<passwordrecoveryform *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->slot_show(); break;
-        case 1: _t->on_pushButtonNext_clicked(); break;
-        case 2: _t->on_pushButtonSave_clicked(); break;
+        case 0: _t->switchToAuthForm(); break;
+        case 1: _t->slot_show(); break;
+        case 2: _t->setLogin((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->on_pushButtonConfirm_clicked(); break;
+        case 4: _t->on_pushButtonRecover_clicked(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (passwordrecoveryform::*)()>(_a, &passwordrecoveryform::switchToAuthForm, 0))
+            return;
+    }
 }
 
 const QMetaObject *passwordrecoveryform::metaObject() const
@@ -103,15 +117,21 @@ int passwordrecoveryform::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
+}
+
+// SIGNAL 0
+void passwordrecoveryform::switchToAuthForm()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

@@ -1,128 +1,158 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "networkclient.h"
 #include <QMessageBox>
-#include <QRegularExpression>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow),
+    solutionWindow(nullptr)
 {
     ui->setupUi(this);
     setWindowTitle("Решение корня уравнения");
 
-    // Добавление методов решения в выпадающий список
-    ui->comboBoxMethod->addItem("Метод дихотомии");
-    ui->comboBoxMethod->addItem("Метод простой итерации");
+    ui->comboBoxMethod->addItem("Дихотомия");
+    ui->comboBoxMethod->addItem("Итерация");
 
-    ui->lineEditFunction->setPlaceholderText("Введите функцию");  // Подсказка для функции
-    ui->lineEditInterval->setPlaceholderText("Введите интервал"); // Подсказка для интервала
-    ui->lineEditTolerance->setPlaceholderText("Введите точность"); // Подсказка для точности
-    ui->lineEditMaxIterations->setPlaceholderText("Введите кол-во итераций"); // Подсказка для итераций
+    // Устанавливаем значения по умолчанию
+    ui->lineEditTolerance->setText("0.0001");
+    ui->lineEditMaxIterations->setText("100");
+
+    // Делаем поля только для чтения
+    ui->lineEditTolerance->setReadOnly(true);
+    ui->lineEditMaxIterations->setReadOnly(true);
+
+    // Добавляем подсказки
+    ui->lineEditFunction->setPlaceholderText("Пример: x^2-4");
+    ui->lineEditInterval->setPlaceholderText("Пример: 1,2");
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    if (solutionWindow) {
+        delete solutionWindow;
+        solutionWindow = nullptr;
+    }
 }
 
 void MainWindow::slot_show()
 {
-    this->show();  // Показываем окно Solution
+    this->show();
 }
 
 void MainWindow::on_pushButtonSolve_clicked()
 {
-    // Получаем данные из полей
+    // 1) Считываем поля
     QString functionText = ui->lineEditFunction->text().trimmed();
     QString intervalText = ui->lineEditInterval->text().trimmed();
     int methodIndex = ui->comboBoxMethod->currentIndex();
 
-    // Проверка на пустые поля
+    // Удаляем все пробелы из функции
+    functionText = functionText.remove(' ');
+
+    // 2) Простые проверки
     if (functionText.isEmpty() || intervalText.isEmpty()) {
-        QMessageBox::warning(this, "Пустые поля", "Пожалуйста, заполните все обязательные поля.");
+        QMessageBox::warning(this, "Пустые поля",
+                             "Пожалуйста, заполните все необходимые поля:\n"
+                             "- Функция\n"
+                             "- Интервал");
         return;
     }
 
-    // Проверка на правильность ввода функции
     if (!isValidFunction(functionText)) {
-        QMessageBox::warning(this, "Ошибка ввода", "Функция должна содержать только латинские буквы, цифры, операторы и скобки.");
+        QMessageBox::warning(this, "Ошибка в функции",
+                             "Функция содержит недопустимые символы или русские буквы.\n\n"
+                             "Разрешены только:\n"
+                             "• Латинские буквы (a-z, A-Z)\n"
+                             "• Цифры (0-9)\n"
+                             "• Математические операторы: + - * / ^ ( )\n"
+                             "• Точка для десятичных дробей\n\n"
+                             "Используйте abs(x) вместо |x|\n"
+                             "Пример правильной функции: x^2-4*sin(x)");
         return;
     }
 
-    // Проверка интервала
     if (!isValidInterval(intervalText)) {
-        QMessageBox::warning(this, "Ошибка ввода", "Интервал должен быть в формате: a,b, например 2,3.");
+        QMessageBox::warning(this, "Ошибка в интервале",
+                             "Некорректный формат интервала.\n\n"
+                             "Требования:\n"
+                             "• Два числа разделённые запятой\n"
+                             "• Левое число должно быть меньше правого\n"
+                             "• Допускаются отрицательные числа\n\n"
+                             "Примеры правильных интервалов:\n"
+                             "1,2\n"
+                             "-3.5,0\n"
+                             "0.1,5.7");
         return;
     }
 
-    // Получаем значения точности и максимального числа итераций
-    bool ok1, ok2;
-    double tolerance = ui->lineEditTolerance->text().toDouble(&ok1);  // Преобразуем строку в double
-    int maxIterations = ui->lineEditMaxIterations->text().toInt(&ok2);  // Преобразуем строку в int
+    // Фиксированные значения по методичке
+    double tolerance = 0.0001;
+    int maxIterations = 100;
 
-    // Проверка на обязательность точности и числа итераций
-    if (!ok1 || tolerance <= 0 || tolerance > 0.1) {
-        QMessageBox::warning(this, "Ошибка ввода", "Пожалуйста, введите корректную точность в пределах от 0.001 до 0.1.");
-        return;
-    }
-
-    if (!ok2 || maxIterations <= 0 || maxIterations > 100) {
-        QMessageBox::warning(this, "Ошибка ввода", "Количество итераций должно быть целым числом от 1 до 100.");
-        return;
-    }
-
-    // Разбиение интервала на части
     QStringList parts = intervalText.split(",");
     if (parts.size() != 2) {
-        QMessageBox::warning(this, "Ошибка ввода", "Введите интервал в формате: a,b.");
+        QMessageBox::warning(this, "Ошибка формата",
+                             "Интервал должен содержать ровно два числа, разделённых запятой.\n"
+                             "Пример: 1,2");
         return;
     }
 
+    bool ok1, ok2;
     double a = parts[0].toDouble(&ok1);
     double b = parts[1].toDouble(&ok2);
 
     if (!ok1 || !ok2) {
-        QMessageBox::warning(this, "Ошибка ввода", "Некорректные значения интервала!");
+        QMessageBox::warning(this, "Ошибка чисел",
+                             "Одно или оба числа в интервале не являются допустимыми числами.\n"
+                             "Пожалуйста, используйте только цифры и точку для десятичных дробей.");
         return;
     }
 
-    // Проверка a < b
     if (a >= b) {
-        QMessageBox::warning(this, "Ошибка ввода", "Левая граница интервала должна быть меньше правой.");
+        QMessageBox::warning(this, "Некорректный интервал",
+                             "Левая граница интервала должна быть меньше правой.\n\n"
+                             "Вы ввели: [" + QString::number(a) + ", " + QString::number(b) + "]\n"
+                                                                                    "Исправьте интервал так, чтобы первое число было меньше второго.");
         return;
     }
 
-    // Отправка данных на сервер
-    emit sendToServer(functionText, a, b, methodIndex, tolerance, maxIterations);
+    // 3) Запрашиваем решение у сервера
+    QString html = NetworkClient::instance()->getSolution(
+        functionText,
+        a, b,
+        methodIndex,
+        tolerance,
+        maxIterations
+        );
 
-    // Уведомление пользователя
-    QMessageBox::information(this, "Успех", "Данные отправлены на сервер.");
+    if (html.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка сервера",
+                             "Сервер не смог решить уравнение.\n\n"
+                             "Возможные причины:\n"
+                             "• Некорректная функция\n"
+                             "• Отсутствие решения на интервале\n"
+                             "• Проблемы с подключением\n\n"
+                             "Проверьте функцию и интервал и попробуйте снова.");
+        return;
+    }
 
-    // Открываем окно Solution, чтобы отобразить решение
-    slot_show();
+    // 4) Отображаем решение
+    emit solution_ok(html);
 }
 
-
-
-// Проверка функции на правильность ввода
+// Проверка функции из допустимых символов
 bool MainWindow::isValidFunction(const QString& function)
 {
-    // Разрешенные символы в функции (латинские буквы, цифры, операторы, скобки)
-    QRegularExpression regex("^[a-zA-Z0-9\\+\\-\\*\\/\\(\\)\\^\\.\\s]*$");
+    // Разрешаем только латинские буквы, цифры, математические операторы и точку
+    QRegularExpression regex("^[a-zA-Z0-9\\+\\-\\*\\/\\(\\)\\^\\.]+$");
     return regex.match(function).hasMatch();
 }
 
-// Проверка интервала на корректность
+// Проверка интервала "a,b"
 bool MainWindow::isValidInterval(const QString& interval)
 {
-    // Интервал должен быть в формате "a,b" или "a, b" с дробными числами
-    QRegularExpression regex("^\\d+(\\.\\d+)?\\s*,\\s*\\d+(\\.\\d+)?$");
+    QRegularExpression regex("^\\s*[-+]?\\d+(\\.\\d+)?\\s*,\\s*[-+]?\\d+(\\.\\d+)?\\s*$");
     return regex.match(interval).hasMatch();
-}
-
-// Проверка чисел на корректность
-bool MainWindow::isValidNumber(const QString& text)
-{
-    bool ok;
-    double value = text.toDouble(&ok);
-    return ok && value > 0;  // Проверка, что значение больше нуля
 }

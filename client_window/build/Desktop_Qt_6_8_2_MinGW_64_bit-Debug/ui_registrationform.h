@@ -28,7 +28,7 @@ class Ui_RegistrationForm
 public:
     QLabel *labelPasswordRecovery;
     QPushButton *pushButtonBackToAuth;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QFormLayout *formLayout;
     QVBoxLayout *verticalLayout_5;
     QGridLayout *gridLayout;
@@ -89,10 +89,10 @@ public:
         font1.setPointSize(11);
         font1.setBold(true);
         pushButtonBackToAuth->setFont(font1);
-        widget = new QWidget(RegistrationForm);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(310, 190, 551, 282));
-        formLayout = new QFormLayout(widget);
+        layoutWidget = new QWidget(RegistrationForm);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(310, 190, 551, 282));
+        formLayout = new QFormLayout(layoutWidget);
         formLayout->setObjectName("formLayout");
         formLayout->setContentsMargins(0, 0, 0, 0);
         verticalLayout_5 = new QVBoxLayout();
@@ -101,7 +101,7 @@ public:
         gridLayout->setObjectName("gridLayout");
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
-        lineEditMail = new QLineEdit(widget);
+        lineEditMail = new QLineEdit(layoutWidget);
         lineEditMail->setObjectName("lineEditMail");
         QFont font2;
         font2.setFamilies({QString::fromUtf8("Gilroy")});
@@ -111,19 +111,19 @@ public:
 
         verticalLayout->addWidget(lineEditMail);
 
-        lineEditLogin = new QLineEdit(widget);
+        lineEditLogin = new QLineEdit(layoutWidget);
         lineEditLogin->setObjectName("lineEditLogin");
         lineEditLogin->setFont(font2);
 
         verticalLayout->addWidget(lineEditLogin, 0, Qt::AlignmentFlag::AlignHCenter);
 
-        lineEditPassword = new QLineEdit(widget);
+        lineEditPassword = new QLineEdit(layoutWidget);
         lineEditPassword->setObjectName("lineEditPassword");
         lineEditPassword->setFont(font2);
 
         verticalLayout->addWidget(lineEditPassword);
 
-        lineEditPasswordCheck = new QLineEdit(widget);
+        lineEditPasswordCheck = new QLineEdit(layoutWidget);
         lineEditPasswordCheck->setObjectName("lineEditPasswordCheck");
         lineEditPasswordCheck->setFont(font2);
 
@@ -134,7 +134,7 @@ public:
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
-        labelMail = new QLabel(widget);
+        labelMail = new QLabel(layoutWidget);
         labelMail->setObjectName("labelMail");
         QFont font3;
         font3.setFamilies({QString::fromUtf8("Gilroy")});
@@ -144,19 +144,19 @@ public:
 
         verticalLayout_2->addWidget(labelMail);
 
-        labelLogin = new QLabel(widget);
+        labelLogin = new QLabel(layoutWidget);
         labelLogin->setObjectName("labelLogin");
         labelLogin->setFont(font3);
 
         verticalLayout_2->addWidget(labelLogin);
 
-        labelPassword = new QLabel(widget);
+        labelPassword = new QLabel(layoutWidget);
         labelPassword->setObjectName("labelPassword");
         labelPassword->setFont(font3);
 
         verticalLayout_2->addWidget(labelPassword);
 
-        labelPasswordCheck = new QLabel(widget);
+        labelPasswordCheck = new QLabel(layoutWidget);
         labelPasswordCheck->setObjectName("labelPasswordCheck");
         labelPasswordCheck->setFont(font3);
 
@@ -168,7 +168,7 @@ public:
 
         verticalLayout_5->addLayout(gridLayout);
 
-        pushButtonNext = new QPushButton(widget);
+        pushButtonNext = new QPushButton(layoutWidget);
         pushButtonNext->setObjectName("pushButtonNext");
         QFont font4;
         font4.setFamilies({QString::fromUtf8("Gilroy")});
@@ -178,7 +178,7 @@ public:
 
         verticalLayout_5->addWidget(pushButtonNext);
 
-        pushButtonCreateAccount = new QPushButton(widget);
+        pushButtonCreateAccount = new QPushButton(layoutWidget);
         pushButtonCreateAccount->setObjectName("pushButtonCreateAccount");
         pushButtonCreateAccount->setFont(font4);
 
@@ -189,13 +189,13 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        labelCode = new QLabel(widget);
+        labelCode = new QLabel(layoutWidget);
         labelCode->setObjectName("labelCode");
         labelCode->setFont(font3);
 
         horizontalLayout->addWidget(labelCode);
 
-        lineEditCode = new QLineEdit(widget);
+        lineEditCode = new QLineEdit(layoutWidget);
         lineEditCode->setObjectName("lineEditCode");
         lineEditCode->setMinimumSize(QSize(0, 0));
         lineEditCode->setFont(font2);
