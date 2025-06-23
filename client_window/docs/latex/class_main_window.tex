@@ -1,0 +1,87 @@
+\doxysection{Main\+Window Class Reference}
+\hypertarget{class_main_window}{}\label{class_main_window}\index{MainWindow@{MainWindow}}
+
+
+Главное окно приложения для решения уравнений  
+
+
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Inheritance diagram for Main\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_main_window_a9a15eca3ebf289292af72b78b2cf1b56}\label{class_main_window_a9a15eca3ebf289292af72b78b2cf1b56} 
+void {\bfseries slot\+\_\+show} ()
+\begin{DoxyCompactList}\small\item\em Слот для отображения главного окна \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_main_window_adaaf576370478aa53b700d8706cf9d56}{solution\+\_\+ok}} (const QString \&html)
+\begin{DoxyCompactList}\small\item\em Сигнал успешного получения решения \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{Main\+Window}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор главного окна \end{DoxyCompactList}\item 
+\Hypertarget{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}\label{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Main\+Window} ()
+\begin{DoxyCompactList}\small\item\em Деструктор главного окна \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Главное окно приложения для решения уравнений 
+
+Предоставляет интерфейс для ввода функции и параметров решения, отправки задачи на сервер и отображения результатов. 
+
+\label{doc-constructors}
+\Hypertarget{class_main_window_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_main_window_a996c5a2b6f77944776856f08ec30858d}\index{MainWindow@{MainWindow}!MainWindow@{MainWindow}}
+\index{MainWindow@{MainWindow}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{MainWindow()}{MainWindow()}}
+{\footnotesize\ttfamily \label{class_main_window_a996c5a2b6f77944776856f08ec30858d} 
+Main\+Window\+::\+Main\+Window (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Конструктор главного окна 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Родительский виджет \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_main_window_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_main_window_adaaf576370478aa53b700d8706cf9d56}\index{MainWindow@{MainWindow}!solution\_ok@{solution\_ok}}
+\index{solution\_ok@{solution\_ok}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{solution\_ok}{solution\_ok}}
+{\footnotesize\ttfamily \label{class_main_window_adaaf576370478aa53b700d8706cf9d56} 
+void Main\+Window\+::solution\+\_\+ok (\begin{DoxyParamCaption}\item[{const QString \&}]{html}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Сигнал успешного получения решения 
+
+
+\begin{DoxyParams}{Parameters}
+{\em html} & HTML-\/форматированное решение уравнения \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mainwindow.\+h\item 
+mainwindow.\+cpp\end{DoxyCompactItemize}

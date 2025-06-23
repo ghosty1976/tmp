@@ -1,0 +1,33 @@
+\doxysection{functions\+\_\+for\+\_\+client.\+h}
+\hypertarget{functions__for__client_8h_source}{}\label{functions__for__client_8h_source}\mbox{\hyperlink{functions__for__client_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FUNCTIONS\_FOR\_CLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FUNCTIONS\_FOR\_CLIENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{functions__for__client_8h_a9b334bf03aa3e65ae1f6b12b326f392a}{auth}}(\textcolor{keyword}{const}\ QString\&\ login,\ \textcolor{keyword}{const}\ QString\&\ password);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{functions__for__client_8h_a1153ad5cfaf1fa5cd8354e5936831d5f}{regUser}}(\textcolor{keyword}{const}\ QString\&\ login,\ \textcolor{keyword}{const}\ QString\&\ password,\ \textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ QString\ \mbox{\hyperlink{functions__for__client_8h_a9b880d6733f08177db562b88e663eb27}{requestRegisterCode}}(\textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ QString\ \mbox{\hyperlink{functions__for__client_8h_a4407efdaf954ef28f9478b68cce04d9c}{requestRecoveryCode}}(\textcolor{keyword}{const}\ QString\&\ login);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{functions__for__client_8h_ac4da8f386b97c6e284b9efc91143e15b}{emailExists}}(\textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{functions__for__client_8h_a5cffee01e96b980e371685e43a79d592}{loginExists}}(\textcolor{keyword}{const}\ QString\&\ login);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{functions__for__client_8h_ad886d0391f337a3e1ad60a0bb1beb198}{changeUserPassword}}(\textcolor{keyword}{const}\ QString\&\ login,\ \textcolor{keyword}{const}\ QString\&\ newPassword);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00074\ QString\ \mbox{\hyperlink{functions__for__client_8h_ab6ecb966d14c6cccbb27408ef08a5505}{solveEquation}}(\textcolor{keyword}{const}\ QString\&\ functionText,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ b,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ methodIndex,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tolerance,}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ maxIterations);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FUNCTIONS\_FOR\_CLIENT\_H}}
+
+\end{DoxyCode}

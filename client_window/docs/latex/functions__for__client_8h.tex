@@ -1,0 +1,199 @@
+\doxysection{functions\+\_\+for\+\_\+client.\+h File Reference}
+\hypertarget{functions__for__client_8h}{}\label{functions__for__client_8h}\index{functions\_for\_client.h@{functions\_for\_client.h}}
+
+
+Набор функций для взаимодействия клиента с сервером  
+
+
+{\ttfamily \#include $<$QString$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{functions__for__client_8h_a9b334bf03aa3e65ae1f6b12b326f392a}{auth}} (const QString \&login, const QString \&password)
+\begin{DoxyCompactList}\small\item\em Авторизация пользователя на сервере \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{functions__for__client_8h_a1153ad5cfaf1fa5cd8354e5936831d5f}{reg\+User}} (const QString \&login, const QString \&password, const QString \&email)
+\begin{DoxyCompactList}\small\item\em Регистрация нового пользователя \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{functions__for__client_8h_a9b880d6733f08177db562b88e663eb27}{request\+Register\+Code}} (const QString \&email)
+\begin{DoxyCompactList}\small\item\em Запрос кода подтверждения регистрации \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{functions__for__client_8h_a4407efdaf954ef28f9478b68cce04d9c}{request\+Recovery\+Code}} (const QString \&login)
+\begin{DoxyCompactList}\small\item\em Запрос кода восстановления пароля \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{functions__for__client_8h_ac4da8f386b97c6e284b9efc91143e15b}{email\+Exists}} (const QString \&email)
+\begin{DoxyCompactList}\small\item\em Проверка существования email на сервере \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{functions__for__client_8h_a5cffee01e96b980e371685e43a79d592}{login\+Exists}} (const QString \&login)
+\begin{DoxyCompactList}\small\item\em Проверка существования логина на сервере \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{functions__for__client_8h_ad886d0391f337a3e1ad60a0bb1beb198}{change\+User\+Password}} (const QString \&login, const QString \&new\+Password)
+\begin{DoxyCompactList}\small\item\em Смена пароля пользователя \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{functions__for__client_8h_ab6ecb966d14c6cccbb27408ef08a5505}{solve\+Equation}} (const QString \&function\+Text, double a, double b, int method\+Index, double tolerance, int max\+Iterations)
+\begin{DoxyCompactList}\small\item\em Решение уравнения на сервере \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Набор функций для взаимодействия клиента с сервером 
+
+
+
+\label{doc-func-members}
+\Hypertarget{functions__for__client_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{functions__for__client_8h_a9b334bf03aa3e65ae1f6b12b326f392a}\index{functions\_for\_client.h@{functions\_for\_client.h}!auth@{auth}}
+\index{auth@{auth}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{auth()}{auth()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_a9b334bf03aa3e65ae1f6b12b326f392a} 
+bool auth (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Авторизация пользователя на сервере 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em password} & Пароль пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если авторизация успешна, false в случае ошибки 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_ad886d0391f337a3e1ad60a0bb1beb198}\index{functions\_for\_client.h@{functions\_for\_client.h}!changeUserPassword@{changeUserPassword}}
+\index{changeUserPassword@{changeUserPassword}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{changeUserPassword()}{changeUserPassword()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_ad886d0391f337a3e1ad60a0bb1beb198} 
+bool change\+User\+Password (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{new\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Смена пароля пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em new\+Password} & Новый пароль \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если смена пароля успешна, false в случае ошибки 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_ac4da8f386b97c6e284b9efc91143e15b}\index{functions\_for\_client.h@{functions\_for\_client.h}!emailExists@{emailExists}}
+\index{emailExists@{emailExists}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{emailExists()}{emailExists()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_ac4da8f386b97c6e284b9efc91143e15b} 
+bool email\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Проверка существования email на сервере 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & Email для проверки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если email существует, false если доступен 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_a5cffee01e96b980e371685e43a79d592}\index{functions\_for\_client.h@{functions\_for\_client.h}!loginExists@{loginExists}}
+\index{loginExists@{loginExists}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{loginExists()}{loginExists()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_a5cffee01e96b980e371685e43a79d592} 
+bool login\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})}
+
+
+
+Проверка существования логина на сервере 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин для проверки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если логин существует, false если доступен 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_a1153ad5cfaf1fa5cd8354e5936831d5f}\index{functions\_for\_client.h@{functions\_for\_client.h}!regUser@{regUser}}
+\index{regUser@{regUser}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{regUser()}{regUser()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_a1153ad5cfaf1fa5cd8354e5936831d5f} 
+bool reg\+User (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{password}{, }\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Регистрация нового пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em password} & Пароль пользователя \\
+\hline
+{\em email} & Email пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если регистрация успешна, false в случае ошибки 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_a4407efdaf954ef28f9478b68cce04d9c}\index{functions\_for\_client.h@{functions\_for\_client.h}!requestRecoveryCode@{requestRecoveryCode}}
+\index{requestRecoveryCode@{requestRecoveryCode}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{requestRecoveryCode()}{requestRecoveryCode()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_a4407efdaf954ef28f9478b68cce04d9c} 
+QString request\+Recovery\+Code (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})}
+
+
+
+Запрос кода восстановления пароля 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя для восстановления пароля \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Код восстановления или пустую строку при ошибке 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_a9b880d6733f08177db562b88e663eb27}\index{functions\_for\_client.h@{functions\_for\_client.h}!requestRegisterCode@{requestRegisterCode}}
+\index{requestRegisterCode@{requestRegisterCode}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{requestRegisterCode()}{requestRegisterCode()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_a9b880d6733f08177db562b88e663eb27} 
+QString request\+Register\+Code (\begin{DoxyParamCaption}\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Запрос кода подтверждения регистрации 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & Email для отправки кода подтверждения \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Код подтверждения или пустую строку при ошибке 
+\end{DoxyReturn}
+\Hypertarget{functions__for__client_8h_ab6ecb966d14c6cccbb27408ef08a5505}\index{functions\_for\_client.h@{functions\_for\_client.h}!solveEquation@{solveEquation}}
+\index{solveEquation@{solveEquation}!functions\_for\_client.h@{functions\_for\_client.h}}
+\doxysubsubsection{\texorpdfstring{solveEquation()}{solveEquation()}}
+{\footnotesize\ttfamily \label{functions__for__client_8h_ab6ecb966d14c6cccbb27408ef08a5505} 
+QString solve\+Equation (\begin{DoxyParamCaption}\item[{const QString \&}]{function\+Text}{, }\item[{double}]{a}{, }\item[{double}]{b}{, }\item[{int}]{method\+Index}{, }\item[{double}]{tolerance}{, }\item[{int}]{max\+Iterations}{}\end{DoxyParamCaption})}
+
+
+
+Решение уравнения на сервере 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function\+Text} & Текст функции для решения (например, "{}x\texorpdfstring{$^\wedge$}{\string^}2 -\/ 4"{}) \\
+\hline
+{\em a} & Левая граница интервала \\
+\hline
+{\em b} & Правая граница интервала \\
+\hline
+{\em method\+Index} & Индекс метода решения (0 -\/ дихотомия, 1 -\/ итерации) \\
+\hline
+{\em tolerance} & Точность вычислений \\
+\hline
+{\em max\+Iterations} & Максимальное количество итераций \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HTML-\/контент с решением или пустую строку при ошибке 
+\end{DoxyReturn}

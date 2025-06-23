@@ -1,0 +1,85 @@
+\doxysection{My\+Tcp\+Server Class Reference}
+\hypertarget{class_my_tcp_server}{}\label{class_my_tcp_server}\index{MyTcpServer@{MyTcpServer}}
+
+
+TCP-\/сервер для обработки клиентских запросов  
+
+
+
+
+{\ttfamily \#include $<$mytcpserver.\+h$>$}
+
+Inheritance diagram for My\+Tcp\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_my_tcp_server}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_my_tcp_server_a38478abd34021cde869e72e1e077ea39}{My\+Tcp\+Server}} (\mbox{\hyperlink{class_user_utils}{User\+Utils}} \texorpdfstring{$\ast$}{*}user\+Utils, \mbox{\hyperlink{class_equations_solver}{Equations\+Solver}} \texorpdfstring{$\ast$}{*}eq\+Solver, QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор TCP-\/сервера \end{DoxyCompactList}\item 
+\Hypertarget{class_my_tcp_server_ab39e651ff7c37c152215c02c225e79ef}\label{class_my_tcp_server_ab39e651ff7c37c152215c02c225e79ef} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+My\+Tcp\+Server} ()
+\begin{DoxyCompactList}\small\item\em Деструктор TCP-\/сервера \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_my_tcp_server_ac813395e1854be34f2177262d9a5013a}{incoming\+Connection}} (qintptr socket\+Descriptor) override
+\begin{DoxyCompactList}\small\item\em Обработчик входящих соединений \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+TCP-\/сервер для обработки клиентских запросов 
+
+Обрабатывает входящие соединения, читает данные от клиентов и делегирует выполнение операций соответствующим обработчикам. 
+
+\label{doc-constructors}
+\Hypertarget{class_my_tcp_server_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_my_tcp_server_a38478abd34021cde869e72e1e077ea39}\index{MyTcpServer@{MyTcpServer}!MyTcpServer@{MyTcpServer}}
+\index{MyTcpServer@{MyTcpServer}!MyTcpServer@{MyTcpServer}}
+\doxysubsubsection{\texorpdfstring{MyTcpServer()}{MyTcpServer()}}
+{\footnotesize\ttfamily \label{class_my_tcp_server_a38478abd34021cde869e72e1e077ea39} 
+My\+Tcp\+Server\+::\+My\+Tcp\+Server (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_user_utils}{User\+Utils}} \texorpdfstring{$\ast$}{*}}]{user\+Utils}{, }\item[{\mbox{\hyperlink{class_equations_solver}{Equations\+Solver}} \texorpdfstring{$\ast$}{*}}]{eq\+Solver}{, }\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Конструктор TCP-\/сервера 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Utils} & Утилиты для работы с пользователями \\
+\hline
+{\em eq\+Solver} & Решатель уравнений \\
+\hline
+{\em parent} & Родительский QObject \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_my_tcp_server_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_my_tcp_server_ac813395e1854be34f2177262d9a5013a}\index{MyTcpServer@{MyTcpServer}!incomingConnection@{incomingConnection}}
+\index{incomingConnection@{incomingConnection}!MyTcpServer@{MyTcpServer}}
+\doxysubsubsection{\texorpdfstring{incomingConnection()}{incomingConnection()}}
+{\footnotesize\ttfamily \label{class_my_tcp_server_ac813395e1854be34f2177262d9a5013a} 
+void My\+Tcp\+Server\+::incoming\+Connection (\begin{DoxyParamCaption}\item[{qintptr}]{socket\+Descriptor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Обработчик входящих соединений 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket\+Descriptor} & Дескриптор сокета нового соединения \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mytcpserver.\+h\item 
+mytcpserver.\+cpp\end{DoxyCompactItemize}

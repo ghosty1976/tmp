@@ -1,0 +1,43 @@
+\doxysection{mainwindow.\+h}
+\hypertarget{mainwindow_8h_source}{}\label{mainwindow_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MAINWINDOW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAINWINDOW\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}solution.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }Ui\ \{\ \textcolor{keyword}{class\ }MainWindow;\ \}}
+\DoxyCodeLine{00009\ QT\_END\_NAMESPACE}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{MainWindow}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{MainWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}{\string~MainWindow}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ signals:}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_adaaf576370478aa53b700d8706cf9d56}{solution\_ok}}(\textcolor{keyword}{const}\ QString\ \&html);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_a9a15eca3ebf289292af72b78b2cf1b56}{slot\_show}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonSolve\_clicked();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ Ui::MainWindow\ *ui;\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_solution}{Solution}}\ *solutionWindow\ =\ \textcolor{keyword}{nullptr};\ }
+\DoxyCodeLine{00055\ \ \ \ \ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ isValidFunction(\textcolor{keyword}{const}\ QString\&\ function);}
+\DoxyCodeLine{00062\ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ isValidInterval(\textcolor{keyword}{const}\ QString\&\ interval);}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAINWINDOW\_H}}
+
+\end{DoxyCode}

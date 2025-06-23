@@ -1,0 +1,113 @@
+\doxysection{Auth\+Reg\+Form Class Reference}
+\hypertarget{class_auth_reg_form}{}\label{class_auth_reg_form}\index{AuthRegForm@{AuthRegForm}}
+
+
+Форма авторизации и регистрации пользователя  
+
+
+
+
+{\ttfamily \#include $<$authregform.\+h$>$}
+
+Inheritance diagram for Auth\+Reg\+Form\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_auth_reg_form}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_auth_reg_form_ad352ff103aa3c3d18d71e79e9772e8c1}\label{class_auth_reg_form_ad352ff103aa3c3d18d71e79e9772e8c1} 
+void {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Слот для очистки всех полей формы \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_auth_reg_form_ae115f82369b483be27872a6e4d14e008}{auth\+\_\+ok}} (const QString \&login)
+\begin{DoxyCompactList}\small\item\em Сигнал успешной авторизации \end{DoxyCompactList}\item 
+\Hypertarget{class_auth_reg_form_a678a0eda62151799a5f9f78af59b79b7}\label{class_auth_reg_form_a678a0eda62151799a5f9f78af59b79b7} 
+void {\bfseries switch\+To\+Main\+Window} ()
+\begin{DoxyCompactList}\small\item\em Сигнал перехода в главное окно приложения \end{DoxyCompactList}\item 
+\Hypertarget{class_auth_reg_form_a40bb3ca989a239e93aa66f9828b6e0c4}\label{class_auth_reg_form_a40bb3ca989a239e93aa66f9828b6e0c4} 
+void {\bfseries switch\+To\+Registration\+Form} ()
+\begin{DoxyCompactList}\small\item\em Сигнал перехода на форму регистрации \end{DoxyCompactList}\item 
+\Hypertarget{class_auth_reg_form_a263cb56cc03f64a7bfc9d86eb46636cf}\label{class_auth_reg_form_a263cb56cc03f64a7bfc9d86eb46636cf} 
+void {\bfseries recovery\+\_\+ok} ()
+\begin{DoxyCompactList}\small\item\em Сигнал успешного начала восстановления пароля \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_auth_reg_form_a74dc3fc145110cd946208fe92f974d81}{open\+Recovery\+Form}} (const QString \&login)
+\begin{DoxyCompactList}\small\item\em Сигнал открытия формы восстановления пароля \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_auth_reg_form_a7ec2ba2a7980453c629e141a90602e68}{Auth\+Reg\+Form}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор формы авторизации/регистрации \end{DoxyCompactList}\item 
+\Hypertarget{class_auth_reg_form_a8b95ad00c5d29338f850a0f179b12078}\label{class_auth_reg_form_a8b95ad00c5d29338f850a0f179b12078} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Auth\+Reg\+Form} ()
+\begin{DoxyCompactList}\small\item\em Деструктор формы \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Форма авторизации и регистрации пользователя 
+
+Предоставляет интерфейс для входа в систему, регистрации новых пользователей и восстановления пароля. Включает валидацию вводимых данных. 
+
+\label{doc-constructors}
+\Hypertarget{class_auth_reg_form_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_auth_reg_form_a7ec2ba2a7980453c629e141a90602e68}\index{AuthRegForm@{AuthRegForm}!AuthRegForm@{AuthRegForm}}
+\index{AuthRegForm@{AuthRegForm}!AuthRegForm@{AuthRegForm}}
+\doxysubsubsection{\texorpdfstring{AuthRegForm()}{AuthRegForm()}}
+{\footnotesize\ttfamily \label{class_auth_reg_form_a7ec2ba2a7980453c629e141a90602e68} 
+Auth\+Reg\+Form\+::\+Auth\+Reg\+Form (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Конструктор формы авторизации/регистрации 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Родительский виджет \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_auth_reg_form_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_auth_reg_form_ae115f82369b483be27872a6e4d14e008}\index{AuthRegForm@{AuthRegForm}!auth\_ok@{auth\_ok}}
+\index{auth\_ok@{auth\_ok}!AuthRegForm@{AuthRegForm}}
+\doxysubsubsection{\texorpdfstring{auth\_ok}{auth\_ok}}
+{\footnotesize\ttfamily \label{class_auth_reg_form_ae115f82369b483be27872a6e4d14e008} 
+void Auth\+Reg\+Form\+::auth\+\_\+ok (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Сигнал успешной авторизации 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин авторизованного пользователя \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_auth_reg_form_a74dc3fc145110cd946208fe92f974d81}\index{AuthRegForm@{AuthRegForm}!openRecoveryForm@{openRecoveryForm}}
+\index{openRecoveryForm@{openRecoveryForm}!AuthRegForm@{AuthRegForm}}
+\doxysubsubsection{\texorpdfstring{openRecoveryForm}{openRecoveryForm}}
+{\footnotesize\ttfamily \label{class_auth_reg_form_a74dc3fc145110cd946208fe92f974d81} 
+void Auth\+Reg\+Form\+::open\+Recovery\+Form (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Сигнал открытия формы восстановления пароля 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин для восстановления \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+authregform.\+h\item 
+authregform.\+cpp\end{DoxyCompactItemize}

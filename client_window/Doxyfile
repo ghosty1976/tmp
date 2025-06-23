@@ -1,0 +1,81 @@
+# Doxyfile для клиентской части Qt-приложения
+
+#------------------------------------------------
+# Основные настройки проекта
+#------------------------------------------------
+PROJECT_NAME           = "Клиентское приложение для решения уравнений"
+PROJECT_NUMBER         = 1.0
+PROJECT_BRIEF          = "Документация GUI клиента"
+OUTPUT_DIRECTORY       = docs/client
+OUTPUT_LANGUAGE        = Russian
+OPTIMIZE_OUTPUT_FOR_C  = NO
+OPTIMIZE_OUTPUT_JAVA   = NO
+MARKDOWN_SUPPORT       = YES
+QT_AUTOBRIEF           = YES
+ALIASES                = "qt_slot=\\fn" "qt_signal=\\fn"
+
+#------------------------------------------------
+# Настройки извлечения документации
+#------------------------------------------------
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+INTERNAL_DOCS          = NO
+CASE_SENSE_NAMES       = YES
+SHOW_INCLUDE_FILES     = YES
+SHOW_GROUPED_MEMB_INC  = NO
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = NO
+SORT_MEMBERS_CTORS_1ST = YES
+
+#------------------------------------------------
+# Настройки исходных файлов
+#------------------------------------------------
+INPUT                  = .
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.h *.cpp *.ui
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = *moc_* *.qrc *qmake_*
+EXAMPLE_RECURSIVE      = NO
+
+#------------------------------------------------
+# Настройки HTML вывода
+#------------------------------------------------
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_COLORSTYLE_HUE    = 220
+HTML_TIMESTAMP         = YES
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 280
+SEARCHENGINE           = YES
+
+#------------------------------------------------
+# Настройки диаграмм
+#------------------------------------------------
+HAVE_DOT               = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+UML_LOOK               = YES
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
+DOT_TRANSPARENT        = YES
+
+#------------------------------------------------
+# Специфичные настройки для Qt
+#------------------------------------------------
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED            += Q_OBJECT \
+                         Q_PROPERTY \
+                         Q_DECL_OVERRIDE \
+                         QT_VERSION_CHECK \
+                         QT_DEPRECATED_WARNINGS \
+                         Q_SIGNALS=signals \
+                         Q_SLOTS=slots \
+                         "Q_INVOKABLE=" \
+                         "Q_NULLPTR=nullptr"

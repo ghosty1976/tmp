@@ -1,0 +1,249 @@
+\doxysection{User\+Utils Class Reference}
+\hypertarget{class_user_utils}{}\label{class_user_utils}\index{UserUtils@{UserUtils}}
+
+
+Класс для работы с пользователями и их данными  
+
+
+
+
+{\ttfamily \#include $<$userutils.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_user_utils_afe45706d63cc196ce3a042a0db5f9bd2}{User\+Utils}} (QSql\+Database \&db)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_user_utils}{User\+Utils}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_user_utils_a441622407870f87544ce258142338486}{register\+User}} (const QString \&\mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}}, const QString \&password, const QString \&email, QString \&error)
+\begin{DoxyCompactList}\small\item\em Регистрация нового пользователя \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}} (const QString \&login, const QString \&password)
+\begin{DoxyCompactList}\small\item\em Авторизация пользователя \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_user_utils_a8ec89e89bbe36fea1ab679737461c502}{login\+Exists}} (const QString \&\mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}})
+\begin{DoxyCompactList}\small\item\em Проверка существования логина \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_user_utils_a5ac7983da9338dbbe265d9eac0a2431f}{email\+Exists}} (const QString \&email)
+\begin{DoxyCompactList}\small\item\em Проверка существования email. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_user_utils_a2f155ebcbadad03b3afdbf67e4b7661d}{generate\+Random\+Code}} (int length)
+\begin{DoxyCompactList}\small\item\em Генерация случайного кода \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_user_utils_a7dcdad3beb08cffd3b9a2ec36b662428}{send\+Email\+With\+Code}} (const QString \&to, const QString \&code, QString \&error)
+\begin{DoxyCompactList}\small\item\em Отправка email с кодом подтверждения \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_user_utils_ad6bc425494c1dda1a0696ff1dcbbf6ea}{get\+Email\+By\+Login}} (const QString \&\mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}})
+\begin{DoxyCompactList}\small\item\em Получение email по логину пользователя \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_user_utils_a808c6b892f1a49146ed67264a440ffcc}{change\+Password\+By\+Login}} (const QString \&\mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}}, const QString \&new\+Password)
+\begin{DoxyCompactList}\small\item\em Изменение пароля пользователя \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static QString \mbox{\hyperlink{class_user_utils_aa3484f9a24739e88972a986b047af496}{hash\+Password}} (const QString \&password)
+\begin{DoxyCompactList}\small\item\em Хеширование пароля \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс для работы с пользователями и их данными 
+
+Предоставляет функционал для регистрации, авторизации пользователей, работы с электронной почтой и управления паролями. 
+
+\label{doc-constructors}
+\Hypertarget{class_user_utils_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_user_utils_afe45706d63cc196ce3a042a0db5f9bd2}\index{UserUtils@{UserUtils}!UserUtils@{UserUtils}}
+\index{UserUtils@{UserUtils}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{UserUtils()}{UserUtils()}}
+{\footnotesize\ttfamily \label{class_user_utils_afe45706d63cc196ce3a042a0db5f9bd2} 
+User\+Utils\+::\+User\+Utils (\begin{DoxyParamCaption}\item[{QSql\+Database \&}]{db}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор класса \doxylink{class_user_utils}{User\+Utils}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & Ссылка на объект базы данных \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_user_utils_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_user_utils_a808c6b892f1a49146ed67264a440ffcc}\index{UserUtils@{UserUtils}!changePasswordByLogin@{changePasswordByLogin}}
+\index{changePasswordByLogin@{changePasswordByLogin}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{changePasswordByLogin()}{changePasswordByLogin()}}
+{\footnotesize\ttfamily \label{class_user_utils_a808c6b892f1a49146ed67264a440ffcc} 
+bool User\+Utils\+::change\+Password\+By\+Login (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{new\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Изменение пароля пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em new\+Password} & Новый пароль \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если изменение успешно, false в случае ошибки 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_a5ac7983da9338dbbe265d9eac0a2431f}\index{UserUtils@{UserUtils}!emailExists@{emailExists}}
+\index{emailExists@{emailExists}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{emailExists()}{emailExists()}}
+{\footnotesize\ttfamily \label{class_user_utils_a5ac7983da9338dbbe265d9eac0a2431f} 
+bool User\+Utils\+::email\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Проверка существования email. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & Email для проверки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если email уже существует, false если доступен 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_a2f155ebcbadad03b3afdbf67e4b7661d}\index{UserUtils@{UserUtils}!generateRandomCode@{generateRandomCode}}
+\index{generateRandomCode@{generateRandomCode}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{generateRandomCode()}{generateRandomCode()}}
+{\footnotesize\ttfamily \label{class_user_utils_a2f155ebcbadad03b3afdbf67e4b7661d} 
+QString User\+Utils\+::generate\+Random\+Code (\begin{DoxyParamCaption}\item[{int}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Генерация случайного кода 
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & Длина генерируемого кода \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Сгенерированный код 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_ad6bc425494c1dda1a0696ff1dcbbf6ea}\index{UserUtils@{UserUtils}!getEmailByLogin@{getEmailByLogin}}
+\index{getEmailByLogin@{getEmailByLogin}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{getEmailByLogin()}{getEmailByLogin()}}
+{\footnotesize\ttfamily \label{class_user_utils_ad6bc425494c1dda1a0696ff1dcbbf6ea} 
+QString User\+Utils\+::get\+Email\+By\+Login (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})}
+
+
+
+Получение email по логину пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Email пользователя или пустую строку если не найден 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_aa3484f9a24739e88972a986b047af496}\index{UserUtils@{UserUtils}!hashPassword@{hashPassword}}
+\index{hashPassword@{hashPassword}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{hashPassword()}{hashPassword()}}
+{\footnotesize\ttfamily \label{class_user_utils_aa3484f9a24739e88972a986b047af496} 
+QString User\+Utils\+::hash\+Password (\begin{DoxyParamCaption}\item[{const QString \&}]{password}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Хеширование пароля 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & Пароль для хеширования \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Хеш пароля 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}\index{UserUtils@{UserUtils}!login@{login}}
+\index{login@{login}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \label{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c} 
+bool User\+Utils\+::login (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Авторизация пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em password} & Пароль пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если авторизация успешна, false в случае ошибки 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_a8ec89e89bbe36fea1ab679737461c502}\index{UserUtils@{UserUtils}!loginExists@{loginExists}}
+\index{loginExists@{loginExists}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{loginExists()}{loginExists()}}
+{\footnotesize\ttfamily \label{class_user_utils_a8ec89e89bbe36fea1ab679737461c502} 
+bool User\+Utils\+::login\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})}
+
+
+
+Проверка существования логина 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин для проверки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если логин уже существует, false если доступен 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_a441622407870f87544ce258142338486}\index{UserUtils@{UserUtils}!registerUser@{registerUser}}
+\index{registerUser@{registerUser}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{registerUser()}{registerUser()}}
+{\footnotesize\ttfamily \label{class_user_utils_a441622407870f87544ce258142338486} 
+int User\+Utils\+::register\+User (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{password}{, }\item[{const QString \&}]{email}{, }\item[{QString \&}]{error}{}\end{DoxyParamCaption})}
+
+
+
+Регистрация нового пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em password} & Пароль пользователя \\
+\hline
+{\em email} & Email пользователя \\
+\hline
+{\em error} & Строка для возврата сообщения об ошибке \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ID зарегистрированного пользователя или -\/1 в случае ошибки 
+\end{DoxyReturn}
+\Hypertarget{class_user_utils_a7dcdad3beb08cffd3b9a2ec36b662428}\index{UserUtils@{UserUtils}!sendEmailWithCode@{sendEmailWithCode}}
+\index{sendEmailWithCode@{sendEmailWithCode}!UserUtils@{UserUtils}}
+\doxysubsubsection{\texorpdfstring{sendEmailWithCode()}{sendEmailWithCode()}}
+{\footnotesize\ttfamily \label{class_user_utils_a7dcdad3beb08cffd3b9a2ec36b662428} 
+bool User\+Utils\+::send\+Email\+With\+Code (\begin{DoxyParamCaption}\item[{const QString \&}]{to}{, }\item[{const QString \&}]{code}{, }\item[{QString \&}]{error}{}\end{DoxyParamCaption})}
+
+
+
+Отправка email с кодом подтверждения 
+
+
+\begin{DoxyParams}{Parameters}
+{\em to} & Адрес получателя \\
+\hline
+{\em code} & Код подтверждения \\
+\hline
+{\em error} & Строка для возврата сообщения об ошибке \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если отправка успешна, false в случае ошибки 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+userutils.\+h\item 
+userutils.\+cpp\end{DoxyCompactItemize}

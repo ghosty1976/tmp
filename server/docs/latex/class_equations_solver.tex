@@ -1,0 +1,176 @@
+\doxysection{Equations\+Solver Class Reference}
+\hypertarget{class_equations_solver}{}\label{class_equations_solver}\index{EquationsSolver@{EquationsSolver}}
+
+
+Класс для решения уравнений различными методами  
+
+
+
+
+{\ttfamily \#include $<$equationssolver.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QList$<$ double $>$ \mbox{\hyperlink{class_equations_solver_a04c8e30786ba22e428e55afe361411cd}{find\+All\+Roots\+Dichotomy}} (const QString \&func, double a, double b, double step, double tol, int max\+Iter)
+\begin{DoxyCompactList}\small\item\em Нахождение всех корней методом дихотомии \end{DoxyCompactList}\item 
+QList$<$ double $>$ \mbox{\hyperlink{class_equations_solver_a86fa1efe9bd46d0de228585d96d1c50f}{find\+All\+Roots\+Iteration}} (const QString \&func, double a, double b, double tol, int max\+Iter, int n\+Starts)
+\begin{DoxyCompactList}\small\item\em Нахождение всех корней методом итераций \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_equations_solver_a6c1b7b2a455099ee7b5fc08e08bf4cf2}{eval\+Expression}} (const QString \&expr\+Str, double x)
+\begin{DoxyCompactList}\small\item\em Вычисление значения выражения \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_equations_solver_af8d15be079146a46afc9345707c8dc7d}{find\+Root\+Dichotomy\+Expr}} (const QString \&func, double a, double b, double \&root, double tol, int max\+Iter, int \&iters)
+\begin{DoxyCompactList}\small\item\em Нахождение корня методом дихотомии \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_equations_solver_a878d305208abafc3480b7dedde85507f}{find\+Root\+Iteration\+Expr}} (const QString \&func, double a, double b, double \&root, double tol, int max\+Iter, int \&iters)
+\begin{DoxyCompactList}\small\item\em Нахождение корня методом итераций \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс для решения уравнений различными методами 
+
+Предоставляет функционал для нахождения корней уравнений методами дихотомии и итераций, а также вычисления значений выражений. 
+
+\label{doc-func-members}
+\Hypertarget{class_equations_solver_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_equations_solver_a6c1b7b2a455099ee7b5fc08e08bf4cf2}\index{EquationsSolver@{EquationsSolver}!evalExpression@{evalExpression}}
+\index{evalExpression@{evalExpression}!EquationsSolver@{EquationsSolver}}
+\doxysubsubsection{\texorpdfstring{evalExpression()}{evalExpression()}}
+{\footnotesize\ttfamily \label{class_equations_solver_a6c1b7b2a455099ee7b5fc08e08bf4cf2} 
+double Equations\+Solver\+::eval\+Expression (\begin{DoxyParamCaption}\item[{const QString \&}]{expr\+Str}{, }\item[{double}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Вычисление значения выражения 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expr\+Str} & Строка с выражением (например, "{}x\texorpdfstring{$^\wedge$}{\string^}2 + 2\texorpdfstring{$\ast$}{*}x"{}) \\
+\hline
+{\em x} & Значение переменной x \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат вычисления выражения 
+\end{DoxyReturn}
+\Hypertarget{class_equations_solver_a04c8e30786ba22e428e55afe361411cd}\index{EquationsSolver@{EquationsSolver}!findAllRootsDichotomy@{findAllRootsDichotomy}}
+\index{findAllRootsDichotomy@{findAllRootsDichotomy}!EquationsSolver@{EquationsSolver}}
+\doxysubsubsection{\texorpdfstring{findAllRootsDichotomy()}{findAllRootsDichotomy()}}
+{\footnotesize\ttfamily \label{class_equations_solver_a04c8e30786ba22e428e55afe361411cd} 
+QList$<$ double $>$ Equations\+Solver\+::find\+All\+Roots\+Dichotomy (\begin{DoxyParamCaption}\item[{const QString \&}]{func}{, }\item[{double}]{a}{, }\item[{double}]{b}{, }\item[{double}]{step}{, }\item[{double}]{tol}{, }\item[{int}]{max\+Iter}{}\end{DoxyParamCaption})}
+
+
+
+Нахождение всех корней методом дихотомии 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Строка с функцией (например, "{}x\texorpdfstring{$^\wedge$}{\string^}2 -\/ 4"{}) \\
+\hline
+{\em a} & Левая граница интервала поиска \\
+\hline
+{\em b} & Правая граница интервала поиска \\
+\hline
+{\em step} & Шаг поиска корней \\
+\hline
+{\em tol} & Точность вычислений \\
+\hline
+{\em max\+Iter} & Максимальное количество итераций \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список найденных корней 
+\end{DoxyReturn}
+\Hypertarget{class_equations_solver_a86fa1efe9bd46d0de228585d96d1c50f}\index{EquationsSolver@{EquationsSolver}!findAllRootsIteration@{findAllRootsIteration}}
+\index{findAllRootsIteration@{findAllRootsIteration}!EquationsSolver@{EquationsSolver}}
+\doxysubsubsection{\texorpdfstring{findAllRootsIteration()}{findAllRootsIteration()}}
+{\footnotesize\ttfamily \label{class_equations_solver_a86fa1efe9bd46d0de228585d96d1c50f} 
+QList$<$ double $>$ Equations\+Solver\+::find\+All\+Roots\+Iteration (\begin{DoxyParamCaption}\item[{const QString \&}]{func}{, }\item[{double}]{a}{, }\item[{double}]{b}{, }\item[{double}]{tol}{, }\item[{int}]{max\+Iter}{, }\item[{int}]{n\+Starts}{}\end{DoxyParamCaption})}
+
+
+
+Нахождение всех корней методом итераций 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Строка с функцией (например, "{}x\texorpdfstring{$^\wedge$}{\string^}2 -\/ 4"{}) \\
+\hline
+{\em a} & Левая граница интервала поиска \\
+\hline
+{\em b} & Правая граница интервала поиска \\
+\hline
+{\em tol} & Точность вычислений \\
+\hline
+{\em max\+Iter} & Максимальное количество итераций \\
+\hline
+{\em n\+Starts} & Количество начальных точек для поиска \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список найденных корней 
+\end{DoxyReturn}
+\Hypertarget{class_equations_solver_af8d15be079146a46afc9345707c8dc7d}\index{EquationsSolver@{EquationsSolver}!findRootDichotomyExpr@{findRootDichotomyExpr}}
+\index{findRootDichotomyExpr@{findRootDichotomyExpr}!EquationsSolver@{EquationsSolver}}
+\doxysubsubsection{\texorpdfstring{findRootDichotomyExpr()}{findRootDichotomyExpr()}}
+{\footnotesize\ttfamily \label{class_equations_solver_af8d15be079146a46afc9345707c8dc7d} 
+bool Equations\+Solver\+::find\+Root\+Dichotomy\+Expr (\begin{DoxyParamCaption}\item[{const QString \&}]{func}{, }\item[{double}]{a}{, }\item[{double}]{b}{, }\item[{double \&}]{root}{, }\item[{double}]{tol}{, }\item[{int}]{max\+Iter}{, }\item[{int \&}]{iters}{}\end{DoxyParamCaption})}
+
+
+
+Нахождение корня методом дихотомии 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em func} & Строка с функцией \\
+\hline
+ & {\em a} & Левая граница интервала \\
+\hline
+ & {\em b} & Правая граница интервала \\
+\hline
+\mbox{\texttt{out}}  & {\em root} & Найденный корень \\
+\hline
+ & {\em tol} & Точность вычислений \\
+\hline
+ & {\em max\+Iter} & Максимальное количество итераций \\
+\hline
+\mbox{\texttt{out}}  & {\em iters} & Количество выполненных итераций \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если корень найден, false в противном случае 
+\end{DoxyReturn}
+\Hypertarget{class_equations_solver_a878d305208abafc3480b7dedde85507f}\index{EquationsSolver@{EquationsSolver}!findRootIterationExpr@{findRootIterationExpr}}
+\index{findRootIterationExpr@{findRootIterationExpr}!EquationsSolver@{EquationsSolver}}
+\doxysubsubsection{\texorpdfstring{findRootIterationExpr()}{findRootIterationExpr()}}
+{\footnotesize\ttfamily \label{class_equations_solver_a878d305208abafc3480b7dedde85507f} 
+bool Equations\+Solver\+::find\+Root\+Iteration\+Expr (\begin{DoxyParamCaption}\item[{const QString \&}]{func}{, }\item[{double}]{a}{, }\item[{double}]{b}{, }\item[{double \&}]{root}{, }\item[{double}]{tol}{, }\item[{int}]{max\+Iter}{, }\item[{int \&}]{iters}{}\end{DoxyParamCaption})}
+
+
+
+Нахождение корня методом итераций 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em func} & Строка с функцией \\
+\hline
+ & {\em a} & Левая граница интервала \\
+\hline
+ & {\em b} & Правая граница интервала \\
+\hline
+\mbox{\texttt{out}}  & {\em root} & Найденный корень \\
+\hline
+ & {\em tol} & Точность вычислений \\
+\hline
+ & {\em max\+Iter} & Максимальное количество итераций \\
+\hline
+\mbox{\texttt{out}}  & {\em iters} & Количество выполненных итераций \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если корень найден, false в противном случае 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+equationssolver.\+h\item 
+equationssolver.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,39 @@
+\doxysection{userutils.\+h}
+\hypertarget{userutils_8h_source}{}\label{userutils_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ USERUTILS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ USERUTILS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QSqlDatabase>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_user_utils_afe45706d63cc196ce3a042a0db5f9bd2}{UserUtils}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_user_utils_afe45706d63cc196ce3a042a0db5f9bd2}{UserUtils}}(QSqlDatabase\&\ db);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_user_utils_a441622407870f87544ce258142338486}{registerUser}}(\textcolor{keyword}{const}\ QString\&\ \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}},\ \textcolor{keyword}{const}\ QString\&\ password,\ \textcolor{keyword}{const}\ QString\&\ email,\ QString\&\ error);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}}(\textcolor{keyword}{const}\ QString\&\ \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}},\ \textcolor{keyword}{const}\ QString\&\ password);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_user_utils_a8ec89e89bbe36fea1ab679737461c502}{loginExists}}(\textcolor{keyword}{const}\ QString\&\ \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_user_utils_a5ac7983da9338dbbe265d9eac0a2431f}{emailExists}}(\textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ QString\ \mbox{\hyperlink{class_user_utils_a2f155ebcbadad03b3afdbf67e4b7661d}{generateRandomCode}}(\textcolor{keywordtype}{int}\ length);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_user_utils_a7dcdad3beb08cffd3b9a2ec36b662428}{sendEmailWithCode}}(\textcolor{keyword}{const}\ QString\&\ to,\ \textcolor{keyword}{const}\ QString\&\ code,\ QString\&\ error);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ QString\ \mbox{\hyperlink{class_user_utils_ad6bc425494c1dda1a0696ff1dcbbf6ea}{getEmailByLogin}}(\textcolor{keyword}{const}\ QString\&\ \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}});}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_user_utils_a808c6b892f1a49146ed67264a440ffcc}{changePasswordByLogin}}(\textcolor{keyword}{const}\ QString\&\ \mbox{\hyperlink{class_user_utils_a2a5b6c392ca7fc14483e2f42e601818c}{login}},\ \textcolor{keyword}{const}\ QString\&\ newPassword);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ QString\ \mbox{\hyperlink{class_user_utils_aa3484f9a24739e88972a986b047af496}{hashPassword}}(\textcolor{keyword}{const}\ QString\&\ password);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00093\ \ \ \ \ QSqlDatabase\&\ m\_db;\ }
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ USERUTILS\_H}}
+
+\end{DoxyCode}

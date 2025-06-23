@@ -1,0 +1,28 @@
+\doxysection{dbsingleton.\+h}
+\hypertarget{dbsingleton_8h_source}{}\label{dbsingleton_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DBSINGLETON\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DBSINGLETON\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QSqlDatabase>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }DbSingleton}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ QSqlDatabase\ db;\ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ DbSingleton();\ \ \ \ \ \ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ DbSingleton\&\ \mbox{\hyperlink{class_db_singleton_a70805f6484395257993bb30797555c34}{instance}}();\ \textcolor{comment}{//\ теперь\ возвращает\ ссылку!}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_db_singleton_a6266101791d18631bc33eaa3d25edfd7}{openDB}}(\textcolor{keyword}{const}\ QString\&\ dbPath);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ QSqlDatabase\&\ \mbox{\hyperlink{class_db_singleton_ae9712032e5b3002801b57ac6e3052bcc}{database}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{class_db_singleton_a4e7539afa6be11438815bb133d0b3b14}{\string~DbSingleton}}();}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DBSINGLETON\_H}}
+
+\end{DoxyCode}

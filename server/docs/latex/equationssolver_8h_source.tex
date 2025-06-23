@@ -1,0 +1,26 @@
+\doxysection{equationssolver.\+h}
+\hypertarget{equationssolver_8h_source}{}\label{equationssolver_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EQUATIONSSOLVER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EQUATIONSSOLVER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_equations_solver}{EquationsSolver}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ QList<double>\ \mbox{\hyperlink{class_equations_solver_a04c8e30786ba22e428e55afe361411cd}{findAllRootsDichotomy}}(\textcolor{keyword}{const}\ QString\&\ func,\ \textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b,\ \textcolor{keywordtype}{double}\ step,\ \textcolor{keywordtype}{double}\ tol,\ \textcolor{keywordtype}{int}\ maxIter);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00038\ \ \ \ \ QList<double>\ \mbox{\hyperlink{class_equations_solver_a86fa1efe9bd46d0de228585d96d1c50f}{findAllRootsIteration}}(\textcolor{keyword}{const}\ QString\&\ func,\ \textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b,\ \textcolor{keywordtype}{double}\ tol,\ \textcolor{keywordtype}{int}\ maxIter,\ \textcolor{keywordtype}{int}\ nStarts);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_equations_solver_a6c1b7b2a455099ee7b5fc08e08bf4cf2}{evalExpression}}(\textcolor{keyword}{const}\ QString\&\ exprStr,\ \textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_equations_solver_af8d15be079146a46afc9345707c8dc7d}{findRootDichotomyExpr}}(\textcolor{keyword}{const}\ QString\&\ func,\ \textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b,\ \textcolor{keywordtype}{double}\&\ root,\ \textcolor{keywordtype}{double}\ tol,\ \textcolor{keywordtype}{int}\ maxIter,\ \textcolor{keywordtype}{int}\&\ iters);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_equations_solver_a878d305208abafc3480b7dedde85507f}{findRootIterationExpr}}(\textcolor{keyword}{const}\ QString\&\ func,\ \textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b,\ \textcolor{keywordtype}{double}\&\ root,\ \textcolor{keywordtype}{double}\ tol,\ \textcolor{keywordtype}{int}\ maxIter,\ \textcolor{keywordtype}{int}\&\ iters);}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EQUATIONSSOLVER\_H}}
+
+\end{DoxyCode}

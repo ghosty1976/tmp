@@ -1,0 +1,65 @@
+\doxysection{registrationform.\+h}
+\hypertarget{registrationform_8h_source}{}\label{registrationform_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REGISTRATIONFORM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REGISTRATIONFORM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QKeyEvent>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }Ui\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }RegistrationForm;}
+\DoxyCodeLine{00010\ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_registration_form_a6dc286eaf880cd9f1b5dbc7c2978b0ce}{RegistrationForm}}\ :\ \textcolor{keyword}{public}\ QDialog}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_registration_form_a6dc286eaf880cd9f1b5dbc7c2978b0ce}{RegistrationForm}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00028\ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_registration_form_a6ed1fe3dc40f5c22346452dd6af7d977}{\string~RegistrationForm}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_registration_form_a3a099dacf6b474dfd093efe569023f72}{slot\_show}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ signals:}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_registration_form_a75bde37b35aaa68a3a1b53dda66bddf6}{switchToAuthForm}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonNext\_clicked();}
+\DoxyCodeLine{00050\ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonCreateAccount\_clicked();}
+\DoxyCodeLine{00055\ \ \ \ \ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonBackToAuth\_clicked();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00062\ \ \ \ \ Ui::RegistrationForm\ *ui;\ }
+\DoxyCodeLine{00063\ \ \ \ \ QString\ receivedCode;\ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ QString\ currentEmail;\ \ \ \ \ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{enum}\ Step\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ StepCredentials,\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ StepCode\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \};}
+\DoxyCodeLine{00073\ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ Step\ currentStep\ =\ StepCredentials;\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ showError(\textcolor{keyword}{const}\ QString\&\ title,\ \textcolor{keyword}{const}\ QString\&\ message);}
+\DoxyCodeLine{00082\ \ \ \ \ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ showInfo(\textcolor{keyword}{const}\ QString\&\ title,\ \textcolor{keyword}{const}\ QString\&\ message);}
+\DoxyCodeLine{00089\ \ \ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ updateUI();}
+\DoxyCodeLine{00094\ \ \ \ \ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ validateCredentials();}
+\DoxyCodeLine{00100\ \ \ \ \ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ validateCode();}
+\DoxyCodeLine{00106\ \ \ \ \ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ lockFields();}
+\DoxyCodeLine{00111\ \ \ \ \ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{bool}\ eventFilter(QObject\ *obj,\ QEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00119\ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ REGISTRATIONFORM\_H}}
+
+\end{DoxyCode}

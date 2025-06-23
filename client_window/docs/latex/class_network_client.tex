@@ -1,0 +1,255 @@
+\doxysection{Network\+Client Class Reference}
+\hypertarget{class_network_client}{}\label{class_network_client}\index{NetworkClient@{NetworkClient}}
+
+
+Класс для сетевого взаимодействия клиента с сервером  
+
+
+
+
+{\ttfamily \#include $<$networkclient.\+h$>$}
+
+Inheritance diagram for Network\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_network_client}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_network_client_a0cc29f633bf31735b444b3a776c5ef56}{error\+Occurred}} (const QString \&message)
+\begin{DoxyCompactList}\small\item\em Сигнал об ошибке сети \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_network_client_a4bd788e967829a25c8706ec548f09235}{authenticate}} (const QString \&login, const QString \&password)
+\begin{DoxyCompactList}\small\item\em Аутентификация пользователя \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_network_client_a6eba4b5034eb18dd4a12bcad92bcfc75}{register\+User}} (const QString \&login, const QString \&password, const QString \&email)
+\begin{DoxyCompactList}\small\item\em Регистрация нового пользователя \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_network_client_a8c79715c07a03ce74f87acb07b328a40}{request\+Register\+Code}} (const QString \&email)
+\begin{DoxyCompactList}\small\item\em Запрос кода подтверждения регистрации \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_network_client_ac1c33bcf30aa1a1821188e76ece522a4}{request\+Recovery\+Code}} (const QString \&login)
+\begin{DoxyCompactList}\small\item\em Запрос кода восстановления пароля \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_network_client_a0bb048886ed3ba7504bb250d1d80bf56}{email\+Exists}} (const QString \&email)
+\begin{DoxyCompactList}\small\item\em Проверка существования email. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_network_client_a570aa379761ab946a1b2cbb906d61a9d}{check\+Login\+Exists}} (const QString \&login)
+\begin{DoxyCompactList}\small\item\em Проверка существования логина \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_network_client_a14a6c09973388c17510c42f79c374748}{change\+Password}} (const QString \&login, const QString \&new\+Password)
+\begin{DoxyCompactList}\small\item\em Смена пароля пользователя \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_network_client_aeffe64e25991e367b2f9c225e37fe1a4}{get\+Solution}} (const QString \&function\+Text, double a, double b, int method\+Index, double tolerance, int max\+Iterations)
+\begin{DoxyCompactList}\small\item\em Получение решения уравнения с сервера \end{DoxyCompactList}\item 
+\Hypertarget{class_network_client_a4052aa6e00e67c81e9e29c6e817ef69c}\label{class_network_client_a4052aa6e00e67c81e9e29c6e817ef69c} 
+void {\bfseries disconnect\+From\+Server} ()
+\begin{DoxyCompactList}\small\item\em Закрытие соединения с сервером \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_network_client}{Network\+Client}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_network_client_ac7116b1605146e78e3270f5917e5f937}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Получение единственного экземпляра класса (Singleton) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс для сетевого взаимодействия клиента с сервером 
+
+Реализует singleton-\/паттерн и предоставляет методы для выполнения всех операций с сервером\+: авторизация, регистрация, решение уравнений. 
+
+\label{doc-func-members}
+\Hypertarget{class_network_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_network_client_a4bd788e967829a25c8706ec548f09235}\index{NetworkClient@{NetworkClient}!authenticate@{authenticate}}
+\index{authenticate@{authenticate}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{authenticate()}{authenticate()}}
+{\footnotesize\ttfamily \label{class_network_client_a4bd788e967829a25c8706ec548f09235} 
+bool Network\+Client\+::authenticate (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Аутентификация пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em password} & Пароль пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true при успешной авторизации, false при ошибке 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_a14a6c09973388c17510c42f79c374748}\index{NetworkClient@{NetworkClient}!changePassword@{changePassword}}
+\index{changePassword@{changePassword}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{changePassword()}{changePassword()}}
+{\footnotesize\ttfamily \label{class_network_client_a14a6c09973388c17510c42f79c374748} 
+bool Network\+Client\+::change\+Password (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{new\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Смена пароля пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em new\+Password} & Новый пароль \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true при успешной смене пароля, false при ошибке 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_a570aa379761ab946a1b2cbb906d61a9d}\index{NetworkClient@{NetworkClient}!checkLoginExists@{checkLoginExists}}
+\index{checkLoginExists@{checkLoginExists}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{checkLoginExists()}{checkLoginExists()}}
+{\footnotesize\ttfamily \label{class_network_client_a570aa379761ab946a1b2cbb906d61a9d} 
+bool Network\+Client\+::check\+Login\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})}
+
+
+
+Проверка существования логина 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин для проверки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если логин уже существует, false если доступен 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_a0bb048886ed3ba7504bb250d1d80bf56}\index{NetworkClient@{NetworkClient}!emailExists@{emailExists}}
+\index{emailExists@{emailExists}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{emailExists()}{emailExists()}}
+{\footnotesize\ttfamily \label{class_network_client_a0bb048886ed3ba7504bb250d1d80bf56} 
+bool Network\+Client\+::email\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Проверка существования email. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & Email для проверки \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если email уже существует, false если доступен 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_a0cc29f633bf31735b444b3a776c5ef56}\index{NetworkClient@{NetworkClient}!errorOccurred@{errorOccurred}}
+\index{errorOccurred@{errorOccurred}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{errorOccurred}{errorOccurred}}
+{\footnotesize\ttfamily \label{class_network_client_a0cc29f633bf31735b444b3a776c5ef56} 
+void Network\+Client\+::error\+Occurred (\begin{DoxyParamCaption}\item[{const QString \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Сигнал об ошибке сети 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Текст ошибки \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_network_client_aeffe64e25991e367b2f9c225e37fe1a4}\index{NetworkClient@{NetworkClient}!getSolution@{getSolution}}
+\index{getSolution@{getSolution}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{getSolution()}{getSolution()}}
+{\footnotesize\ttfamily \label{class_network_client_aeffe64e25991e367b2f9c225e37fe1a4} 
+QString Network\+Client\+::get\+Solution (\begin{DoxyParamCaption}\item[{const QString \&}]{function\+Text}{, }\item[{double}]{a}{, }\item[{double}]{b}{, }\item[{int}]{method\+Index}{, }\item[{double}]{tolerance}{, }\item[{int}]{max\+Iterations}{}\end{DoxyParamCaption})}
+
+
+
+Получение решения уравнения с сервера 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function\+Text} & Текст функции для решения \\
+\hline
+{\em a} & Левая граница интервала \\
+\hline
+{\em b} & Правая граница интервала \\
+\hline
+{\em method\+Index} & Индекс метода (0 -\/ дихотомия, 1 -\/ итерации) \\
+\hline
+{\em tolerance} & Точность вычислений \\
+\hline
+{\em max\+Iterations} & Максимальное число итераций \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Решение в формате HTML или пустую строку при ошибке 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_ac7116b1605146e78e3270f5917e5f937}\index{NetworkClient@{NetworkClient}!instance@{instance}}
+\index{instance@{instance}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{class_network_client_ac7116b1605146e78e3270f5917e5f937} 
+\mbox{\hyperlink{class_network_client}{Network\+Client}} \texorpdfstring{$\ast$}{*} Network\+Client\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Получение единственного экземпляра класса (Singleton) 
+
+\begin{DoxyReturn}{Returns}
+Указатель на экземпляр \doxylink{class_network_client}{Network\+Client} 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_a6eba4b5034eb18dd4a12bcad92bcfc75}\index{NetworkClient@{NetworkClient}!registerUser@{registerUser}}
+\index{registerUser@{registerUser}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{registerUser()}{registerUser()}}
+{\footnotesize\ttfamily \label{class_network_client_a6eba4b5034eb18dd4a12bcad92bcfc75} 
+bool Network\+Client\+::register\+User (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{, }\item[{const QString \&}]{password}{, }\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Регистрация нового пользователя 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+{\em password} & Пароль пользователя \\
+\hline
+{\em email} & Email пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true при успешной регистрации, false при ошибке 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_ac1c33bcf30aa1a1821188e76ece522a4}\index{NetworkClient@{NetworkClient}!requestRecoveryCode@{requestRecoveryCode}}
+\index{requestRecoveryCode@{requestRecoveryCode}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{requestRecoveryCode()}{requestRecoveryCode()}}
+{\footnotesize\ttfamily \label{class_network_client_ac1c33bcf30aa1a1821188e76ece522a4} 
+QString Network\+Client\+::request\+Recovery\+Code (\begin{DoxyParamCaption}\item[{const QString \&}]{login}{}\end{DoxyParamCaption})}
+
+
+
+Запрос кода восстановления пароля 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & Логин пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Код восстановления или пустую строку при ошибке 
+\end{DoxyReturn}
+\Hypertarget{class_network_client_a8c79715c07a03ce74f87acb07b328a40}\index{NetworkClient@{NetworkClient}!requestRegisterCode@{requestRegisterCode}}
+\index{requestRegisterCode@{requestRegisterCode}!NetworkClient@{NetworkClient}}
+\doxysubsubsection{\texorpdfstring{requestRegisterCode()}{requestRegisterCode()}}
+{\footnotesize\ttfamily \label{class_network_client_a8c79715c07a03ce74f87acb07b328a40} 
+QString Network\+Client\+::request\+Register\+Code (\begin{DoxyParamCaption}\item[{const QString \&}]{email}{}\end{DoxyParamCaption})}
+
+
+
+Запрос кода подтверждения регистрации 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & Email для отправки кода \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Код подтверждения или пустую строку при ошибке 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+networkclient.\+h\item 
+networkclient.\+cpp\end{DoxyCompactItemize}

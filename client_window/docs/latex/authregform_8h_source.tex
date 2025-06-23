@@ -1,0 +1,61 @@
+\doxysection{authregform.\+h}
+\hypertarget{authregform_8h_source}{}\label{authregform_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUTHREGFORM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUTHREGFORM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QLineEdit>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }Ui\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }AuthRegForm;}
+\DoxyCodeLine{00009\ \}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_auth_reg_form_a7ec2ba2a7980453c629e141a90602e68}{AuthRegForm}}\ :\ \textcolor{keyword}{public}\ QDialog}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_auth_reg_form_a7ec2ba2a7980453c629e141a90602e68}{AuthRegForm}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_auth_reg_form_a8b95ad00c5d29338f850a0f179b12078}{\string~AuthRegForm}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonAuth\_clicked();\ \ \textcolor{comment}{//\ Обработка\ авторизации}}
+\DoxyCodeLine{00038\ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonReg\_clicked();\ \ \ \textcolor{comment}{//\ Переход\ на\ форму\ регистрации}}
+\DoxyCodeLine{00043\ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButtonForgotPassword\_clicked();\ \ \textcolor{comment}{//\ Восстановление\ пароля}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \ \ Ui::AuthRegForm\ *ui;\ \ }
+\DoxyCodeLine{00051\ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ showError(\textcolor{keyword}{const}\ QString\ \&title,\ \textcolor{keyword}{const}\ QString\ \&message);\ \ \textcolor{comment}{//\ Показать\ ошибку\ с\ соответствующим\ названием\ окна}}
+\DoxyCodeLine{00058\ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ setupFieldFocus();\ \ \textcolor{comment}{//\ Настройка\ перехода\ между\ полями}}
+\DoxyCodeLine{00063\ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ isValidEnglishInput(\textcolor{keyword}{const}\ QString\&\ input);\ \ \textcolor{comment}{//\ Проверка\ ввода\ на\ английские\ буквы\ и\ цифры}}
+\DoxyCodeLine{00070\ \ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ isRequestSent\ =\ \textcolor{keyword}{false};\ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{int}\ authAttempts;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ eventFilter(QObject\ *obj,\ QEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ signals:}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_auth_reg_form_ae115f82369b483be27872a6e4d14e008}{auth\_ok}}(\textcolor{keyword}{const}\ QString\ \&login);\ \ \textcolor{comment}{//\ Успешная\ авторизация}}
+\DoxyCodeLine{00088\ \ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_auth_reg_form_a678a0eda62151799a5f9f78af59b79b7}{switchToMainWindow}}();\ \ \textcolor{comment}{//\ Переход\ в\ главное\ окно}}
+\DoxyCodeLine{00093\ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_auth_reg_form_a40bb3ca989a239e93aa66f9828b6e0c4}{switchToRegistrationForm}}();\ \ \textcolor{comment}{//\ Переход\ на\ форму\ регистрации}}
+\DoxyCodeLine{00098\ \ \ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_auth_reg_form_a263cb56cc03f64a7bfc9d86eb46636cf}{recovery\_ok}}();\ \ \textcolor{comment}{//\ Открытие\ формы\ восстановления\ пароля}}
+\DoxyCodeLine{00103\ \ \ \ \ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_auth_reg_form_a74dc3fc145110cd946208fe92f974d81}{openRecoveryForm}}(\textcolor{keyword}{const}\ QString\ \&login);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_auth_reg_form_ad352ff103aa3c3d18d71e79e9772e8c1}{clear}}();\ \ \textcolor{comment}{//\ Очистка\ всех\ полей}}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUTHREGFORM\_H}}
+
+\end{DoxyCode}

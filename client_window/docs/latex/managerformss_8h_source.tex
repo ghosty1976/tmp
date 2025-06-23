@@ -1,0 +1,37 @@
+\doxysection{managerformss.\+h}
+\hypertarget{managerformss_8h_source}{}\label{managerformss_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MANAGERFORMSS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MANAGERFORMSS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}authregform.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}mainwindow.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}passwordrecoveryform.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}solution.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}registrationform.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_manager_formss_ad967cf69a660086d7c2aae5911e581dd}{ManagerFormss}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_manager_formss_a11f8033a09ebb99836bc31051b053c7a}{showRegistrationForm}}();\ \ \textcolor{comment}{//\ Переход\ на\ форму\ регистрации}}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_manager_formss_a20935ab2801c44fc85e97a301b6e2fd2}{showAuthForm}}();\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Переход\ обратно\ на\ форму\ авторизации}}
+\DoxyCodeLine{00032\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_manager_formss_ad967cf69a660086d7c2aae5911e581dd}{ManagerFormss}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr},\ \mbox{\hyperlink{class_main_window}{MainWindow}}\ *mainWindow\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00039\ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_manager_formss_a29ba167b7a10b26a12546a355e056c67}{\string~ManagerFormss}}();\ \textcolor{comment}{//\ Деструктор}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{class_auth_reg_form}{AuthRegForm}}\ *curr\_auth;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classpasswordrecoveryform}{passwordrecoveryform}}\ *recovery\_password;\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_solution}{Solution}}\ *curr\_solution;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_main_window}{MainWindow}}\ *main\_window;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{class_registration_form}{RegistrationForm}}\ *registrationForm;\ }
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MANAGERFORMSS\_H}}
+
+\end{DoxyCode}

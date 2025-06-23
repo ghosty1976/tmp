@@ -1,0 +1,62 @@
+\doxysection{networkclient.\+h}
+\hypertarget{networkclient_8h_source}{}\label{networkclient_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ NETWORKCLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ NETWORKCLIENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QTcpSocket>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QPointer>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }NetworkClient\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ NetworkClient*\ \mbox{\hyperlink{class_network_client_ac7116b1605146e78e3270f5917e5f937}{instance}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_network_client_a4bd788e967829a25c8706ec548f09235}{authenticate}}(\textcolor{keyword}{const}\ QString\&\ login,\ \textcolor{keyword}{const}\ QString\&\ password);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_network_client_a6eba4b5034eb18dd4a12bcad92bcfc75}{registerUser}}(\textcolor{keyword}{const}\ QString\&\ login,\ \textcolor{keyword}{const}\ QString\&\ password,\ \textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \ \ \ \ QString\ \mbox{\hyperlink{class_network_client_a8c79715c07a03ce74f87acb07b328a40}{requestRegisterCode}}(\textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00055\ \ \ \ \ QString\ \mbox{\hyperlink{class_network_client_ac1c33bcf30aa1a1821188e76ece522a4}{requestRecoveryCode}}(\textcolor{keyword}{const}\ QString\&\ login);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_network_client_a0bb048886ed3ba7504bb250d1d80bf56}{emailExists}}(\textcolor{keyword}{const}\ QString\&\ email);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_network_client_a570aa379761ab946a1b2cbb906d61a9d}{checkLoginExists}}(\textcolor{keyword}{const}\ QString\&\ login);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_network_client_a14a6c09973388c17510c42f79c374748}{changePassword}}(\textcolor{keyword}{const}\ QString\&\ login,\ \textcolor{keyword}{const}\ QString\&\ newPassword);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00089\ \ \ \ \ QString\ \mbox{\hyperlink{class_network_client_aeffe64e25991e367b2f9c225e37fe1a4}{getSolution}}(\textcolor{keyword}{const}\ QString\&\ functionText,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ methodIndex,}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tolerance,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ maxIterations);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_client_a4052aa6e00e67c81e9e29c6e817ef69c}{disconnectFromServer}}();}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ signals:}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_network_client_a0cc29f633bf31735b444b3a776c5ef56}{errorOccurred}}(\textcolor{keyword}{const}\ QString\&\ message);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{explicit}\ NetworkClient(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{bool}\ sendRequest(\textcolor{keyword}{const}\ QByteArray\&\ request,\ QString\&\ response);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ QPointer<QTcpSocket>\ socket;\ \ }
+\DoxyCodeLine{00123\ \ \ \ \ QTimer*\ connectionTimer;\ \ \ \ \ \ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{bool}\ connectToServer();}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ onSocketError(QAbstractSocket::SocketError\ socketError);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ onConnectionTimeout();}
+\DoxyCodeLine{00142\ \};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NETWORKCLIENT\_H}}
+
+\end{DoxyCode}

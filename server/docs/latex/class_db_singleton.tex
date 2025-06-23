@@ -1,0 +1,100 @@
+\doxysection{Db\+Singleton Class Reference}
+\hypertarget{class_db_singleton}{}\label{class_db_singleton}\index{DbSingleton@{DbSingleton}}
+
+
+Класс-\/одиночка для работы с базой данных  
+
+
+
+
+{\ttfamily \#include $<$dbsingleton.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_db_singleton_a6266101791d18631bc33eaa3d25edfd7}{open\+DB}} (const QString \&db\+Path)
+\begin{DoxyCompactList}\small\item\em Открытие соединения с базой данных \end{DoxyCompactList}\item 
+QSql\+Database \& \mbox{\hyperlink{class_db_singleton_ae9712032e5b3002801b57ac6e3052bcc}{database}} ()
+\begin{DoxyCompactList}\small\item\em Получение объекта базы данных \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_db_singleton_a4e7539afa6be11438815bb133d0b3b14}{\texorpdfstring{$\sim$}{\string~}\+Db\+Singleton}} ()
+\begin{DoxyCompactList}\small\item\em Деструктор класса \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_db_singleton}{Db\+Singleton}} \& \mbox{\hyperlink{class_db_singleton_a70805f6484395257993bb30797555c34}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Получение единственного экземпляра класса \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс-\/одиночка для работы с базой данных 
+
+Реализует паттерн Singleton для обеспечения единственного экземпляра соединения с базой данных в приложении. 
+
+\label{doc-constructors}
+\Hypertarget{class_db_singleton_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_db_singleton_a4e7539afa6be11438815bb133d0b3b14}\index{DbSingleton@{DbSingleton}!````~DbSingleton@{\texorpdfstring{$\sim$}{\string~}DbSingleton}}
+\index{````~DbSingleton@{\texorpdfstring{$\sim$}{\string~}DbSingleton}!DbSingleton@{DbSingleton}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DbSingleton()}{\string~DbSingleton()}}
+{\footnotesize\ttfamily \label{class_db_singleton_a4e7539afa6be11438815bb133d0b3b14} 
+Db\+Singleton\+::\texorpdfstring{$\sim$}{\string~}\+Db\+Singleton (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Деструктор класса 
+
+Закрывает соединение с базой данных при уничтожении объекта 
+
+\label{doc-func-members}
+\Hypertarget{class_db_singleton_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_db_singleton_ae9712032e5b3002801b57ac6e3052bcc}\index{DbSingleton@{DbSingleton}!database@{database}}
+\index{database@{database}!DbSingleton@{DbSingleton}}
+\doxysubsubsection{\texorpdfstring{database()}{database()}}
+{\footnotesize\ttfamily \label{class_db_singleton_ae9712032e5b3002801b57ac6e3052bcc} 
+QSql\+Database \& Db\+Singleton\+::database (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Получение объекта базы данных 
+
+\begin{DoxyReturn}{Returns}
+Ссылка на объект QSql\+Database 
+\end{DoxyReturn}
+\Hypertarget{class_db_singleton_a70805f6484395257993bb30797555c34}\index{DbSingleton@{DbSingleton}!instance@{instance}}
+\index{instance@{instance}!DbSingleton@{DbSingleton}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{class_db_singleton_a70805f6484395257993bb30797555c34} 
+\mbox{\hyperlink{class_db_singleton}{Db\+Singleton}} \& Db\+Singleton\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Получение единственного экземпляра класса 
+
+\begin{DoxyReturn}{Returns}
+Ссылка на единственный экземпляр \doxylink{class_db_singleton}{Db\+Singleton} 
+\end{DoxyReturn}
+\Hypertarget{class_db_singleton_a6266101791d18631bc33eaa3d25edfd7}\index{DbSingleton@{DbSingleton}!openDB@{openDB}}
+\index{openDB@{openDB}!DbSingleton@{DbSingleton}}
+\doxysubsubsection{\texorpdfstring{openDB()}{openDB()}}
+{\footnotesize\ttfamily \label{class_db_singleton_a6266101791d18631bc33eaa3d25edfd7} 
+bool Db\+Singleton\+::open\+DB (\begin{DoxyParamCaption}\item[{const QString \&}]{db\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Открытие соединения с базой данных 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db\+Path} & Путь к файлу базы данных \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true если соединение успешно установлено, false в случае ошибки 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+dbsingleton.\+h\item 
+dbsingleton.\+cpp\end{DoxyCompactItemize}
